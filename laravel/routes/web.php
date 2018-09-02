@@ -14,7 +14,7 @@
 //GET Routes
 Route::get('/', 'IndexController@index');
 Route::get('/registro', 'IndexController@novoRegistro');
-
+Route::get('/logout', 'Auth\LoginController@logout');
 
 Auth::routes();
 

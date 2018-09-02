@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nome', 'email', 'password','salt'
+        'nome', 'email', 'password','salt','ativo','endereco','cep'
     ];
 
     /**
@@ -25,8 +25,19 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','salt',
+        'password', 'remember_token','salt'
     ];
+
+    /**
+     * Descriçao de Variaveis
+     */
+    //Tipo de Perfil do usuario
+    public $_dscTipoPerfil = [1=>'Administrador',2=>'Usuario'];
+
+    //Situaçao do Usuario
+    public $_dscSituacao = [1=>'Ativo', 2=>'Inativo'];
+
+
 
     //Save New Register
     public function saveNew($arrData){
@@ -36,12 +47,16 @@ class User extends Authenticatable
         $userModel = new User();
         $userModel->nome     = $arrData['name'];
         $userModel->email    = $arrData['email'];
-        $userModel->password = Hash::make($salt.'.'.$arrData['password']);
+        $userModel->password = Hash::make($this->_criptoSenha($salt,$arrData['password']));
         $userModel->salt     = $salt;
 
         return $userModel->saveOrFail();
     }//save new
 
+    //Funçao para criptografar a senha
+    public function _criptoSenha($salt,$senha){
+        return $salt.'.'.$senha;
+    }//Cripto senha
 
     //Funçao para Criar SALT - Create SALT
     public function _createSalt($min = 6, $max = 90){

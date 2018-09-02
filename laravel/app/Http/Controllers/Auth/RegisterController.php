@@ -64,12 +64,14 @@ class RegisterController extends Controller
             'password.required' => '- O campo <b>SENHA</b> &eacute; de preenchimento obrigat&oacute;rio',
             'password.min' => '- O campo <b>SENHA</b> deve possuir o M&Iacute;NIMO de 6 caracteres',
             'password.max' => '- O campo <b>SENHA</b> n&atilde;o deve exceder o M&Aacute;XIMO de 200 caracteres',//Input Senha
+            'password.confirmed' => '- O campo <b>SENHA</b> deve possuir o mesmo valor do campo Confirmaçao de senha',//Input Senha
 
             //Input emai
             'email.required' => '- O campo <b>EMAIL</b> &eacute; de preenchimento obrigat&oacute;rio',
             'email.email' => '- O campo <b>EMAIL</b> n&atilde;o parece ser valido',
             'email.min' => '- O campo <b>EMAIL</b> deve possuir o M&Iacute;NIMO de 6 caracteres',
             'email.max' => '- O campo <b>EMAIL</b> n&atilde;o deve exceder o M&Aacute;XIMO de 200 caracteres',
+            'email.unique' => '- Esse <b>EMAIL</b> j&aacute; est&aacute; cadastrado em nossa base, por favor, informe outro email',
         ]);
     }
 

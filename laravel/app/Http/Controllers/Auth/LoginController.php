@@ -37,12 +37,11 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('guest')->except('logout');
-    }
+    }//constructor
 
-
+    //Implementa a funçao de login
     public function login(Request $request){
         //Valida login de Usuario
         $usuarioModel = new Usuario();
@@ -51,10 +50,10 @@ class LoginController extends Controller
         ])->first();
 
         if(!empty($userProfile)){
-            $cryptPassword = $userProfile->salt.'.'.$request->password;
+            $cryptPassword=$usuarioModel->_criptoSenha($userProfile->salt,$request->password);
 
             //Validate authentication
-             if (Auth::attempt(['email' => $request->email, 'password' => $cryptPassword])){
+             if (Auth::attempt(['email' => $request->email, 'password' => $cryptPassword,'ativo'=>1])){
                  return redirect($this->redirectTo);
              }else {
                  //return $this->sendFailedLoginResponse($request, 'auth.failed_status');
@@ -66,4 +65,5 @@ class LoginController extends Controller
             return redirect()->route('login')->with('error',1);
          }//if / else !empty
     }//login
+
 }//class

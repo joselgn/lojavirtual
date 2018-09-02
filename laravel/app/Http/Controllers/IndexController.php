@@ -17,7 +17,7 @@ class IndexController extends Controller{
 
     //Index
     public function index(){
-        return view('welcome');
+        return view('inicio');
     }//index action
 
     //Registro controller
