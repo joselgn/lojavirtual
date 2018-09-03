@@ -4,32 +4,32 @@
         <div class="carousel-inner">
             <div class="item active">
                 <div class="container">
-                    <a href="register.html"><img style="width:100%" src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/1.png') }}" alt="special offers"/></a>
+                    <a href="{{ url('/') }}"><img style="width:100%" src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/1.png') }}" alt="special offers"/></a>
                 </div>
             </div>
             <div class="item">
                 <div class="container">
-                    <a href="register.html"><img style="width:100%" src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/2.png') }}" alt=""/></a>
+                    <a href="{{ url('/') }}"><img style="width:100%" src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/2.png') }}" alt=""/></a>
                 </div>
             </div>
             <div class="item">
                 <div class="container">
-                    <a href="register.html"><img src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/3.png') }}" alt=""/></a>
+                    <a href="{{ url('/') }}"><img src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/3.png') }}" alt=""/></a>
                 </div>
             </div>
             <div class="item">
                 <div class="container">
-                    <a href="register.html"><img src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/4.png') }}" alt=""/></a>
+                    <a href="{{ url('/') }}"><img src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/4.png') }}" alt=""/></a>
                 </div>
             </div>
             <div class="item">
                 <div class="container">
-                    <a href="register.html"><img src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/5.png') }}" alt=""/></a>
+                    <a href="{{ url('/') }}"><img src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/5.png') }}" alt=""/></a>
                 </div>
             </div>
             <div class="item">
                 <div class="container">
-                    <a href="register.html"><img src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/6.png') }}" alt=""/></a>
+                    <a href="{{ url('/') }}"><img src="{{ asset('libraries/bootstrap-shop/themes/images/carousel/6.png') }}" alt=""/></a>
                 </div>
             </div>
         </div>

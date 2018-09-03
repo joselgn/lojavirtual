@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -22,10 +23,14 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        //echo '<pre/>';
-        //var_dump(Auth::user()->id);
-        //exit;
+        $authInstance = Auth::user();
+        $modelUsuario = new User();
 
-        return view('home');
+
+
+        return view('home',[
+            'perfil' => $authInstance->perfil,
+            'dadosPessoais' => ['nome'=>$authInstance->nome,'email'=>$authInstance->email,'endereco'=>$authInstance->email],
+        ]);
     }//index
 }//class

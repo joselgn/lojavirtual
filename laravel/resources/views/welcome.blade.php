@@ -5,10 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <title>Laravel</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+        <!-- Fonts
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">-->
 
         <!-- Styles -->
         <!-- <link href="{{ asset('libraries/bootstrap-shop/themes/bootshop/bootstrap.min.css') }}" rel="stylesheet"> -->  <!-- Default -->
@@ -18,9 +21,15 @@
         <link href="{{ asset('libraries/bootstrap-shop/themes/switch/themeswitch.css') }}" rel="stylesheet">
         <link href="{{ asset('libraries/bootstrap-shop/themes/spacelab/bootstrap.min.css') }}" rel="stylesheet">
 
+        <!-- Styles JqxWidgets -->
+        <link href="{{ asset('libraries/jqwidgets/styles/jqx.base.css') }}" rel="stylesheet">
+
+        <!-- Styles Custom -->
         <link href="{{ asset('libraries/bootstrap-shop/themes/css/base.css') }}" rel="stylesheet">
 
 
+        <!-- Scripts Libraries-->
+        <script type="text/javascript" src="{{ asset('libraries/js/jquery.js') }}"></script>
     </head>
     <body>
         <!-- Header ================================================== -->
@@ -46,6 +55,7 @@
                         <ul id="topMenu" class="nav pull-right">
                             @if (Route::has('login'))
                                 @auth
+                                    <li><span style="color: #fc4500">{{ $dadosPessoais['nome'] }}</span></li>
                                     <li><a href="{{ url('/home') }}">Meu Carrinho</a></li>
                                     <li><a href="{{ url('/logout') }}">Sair</a></li>
                                 @else
@@ -124,9 +134,9 @@
                     </div>
                     <div id="socialMedia" class="span3 pull-right">
                         <h5>SOCIAL MEDIA </h5>
-                        <a href="#"><img width="60" height="60" src="themes/images/facebook.png" title="facebook" alt="facebook"/></a>
-                        <a href="#"><img width="60" height="60" src="themes/images/twitter.png" title="twitter" alt="twitter"/></a>
-                        <a href="#"><img width="60" height="60" src="themes/images/youtube.png" title="youtube" alt="youtube"/></a>
+                        <a href="#"><img width="60" height="60" src="{{ asset('libraries/bootstrap-shop/themes/images/facebook.png') }}" title="facebook" alt="facebook"/></a>
+                        <a href="#"><img width="60" height="60" src="{{ asset('libraries/bootstrap-shop/themes/images/twitter.png') }}" title="twitter" alt="twitter"/></a>
+                        <a href="#"><img width="60" height="60" src="{{ asset('libraries/bootstrap-shop/themes/images/youtube.png') }}" title="youtube" alt="youtube"/></a>
                     </div>
                 </div>
                 <p class="pull-right">&copy; Bootshop</p>
@@ -134,15 +144,35 @@
         </div>
         <!-- Footer END ================================================================== -->
 
-        <!-- Scripts Libraries -->
+        <!-- Scripts Libraries-->
         <script src="{{ asset('libraries/js/jQuery.js') }}"></script>
-        <script src="{{ asset('libraries/bootstrap-shop/themes/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('libraries/bootstrap-shop/themes/js/google-code-prettify/prettify.js') }}"></script>
-        <script src="{{ asset('libraries/bootstrap-shop/themes/js/bootshop.js') }}"></script>
-        <script src="{{ asset('libraries/bootstrap-shop/themes/js/jquery.lightbox-0.5.js') }}"></script>
-        <script src="{{ asset('libraries/bootstrap-shop/themes/switch/theamswitcher.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/bootstrap-shop/themes/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/bootstrap-shop/themes/js/google-code-prettify/prettify.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/bootstrap-shop/themes/js/bootshop.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/bootstrap-shop/themes/js/jquery.lightbox-0.5.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/bootstrap-shop/themes/switch/theamswitcher.js') }}"></script>
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/basic.js') }}"></script>
+
+        <!-- Scripts Default App JS-->
+        <script type="text/javascript" src="{{ asset('js/basic.js') }}"></script>
+
+        <!-- Scripts Libraries JqxWidgets-->
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxcore.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxdata.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxbuttons.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxscrollbar.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxmenu.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxcheckbox.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxlistbox.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxdropdownlist.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxgrid.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxgrid.sort.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxgrid.pager.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxgrid.selection.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxgrid.edit.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxgrid.filter.js') }}"></script>
+
+
+        @yield('scripts')
     </body>
 </html>

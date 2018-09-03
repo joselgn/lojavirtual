@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nome', 'email', 'password','salt','ativo','endereco','cep'
+        'nome', 'email', 'password','salt','ativo','endereco','cep','perfil'
     ];
 
     /**
@@ -76,5 +76,7 @@ class User extends Authenticatable
 
         return $strSalt;
     }//create SALT
+
+
 
 }//class

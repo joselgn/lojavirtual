@@ -1,6 +1,14 @@
 @extends('welcome')
-@extends('menu-lateral') <!--Extende menu lateral -->
 @extends('slide-produtos') <!--Extende Layout de ultimos produtos cadastrados -->
+
+<?php
+    if($perfil==1)
+        $menulateral =  'menu-lateral-admin';
+    else
+        $menulateral = 'menu-lateral';
+?>
+
+@extends($menulateral);
 
 @section('conteudo')
 
