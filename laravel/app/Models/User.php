@@ -37,8 +37,6 @@ class User extends Authenticatable
     //Situaçao do Usuario
     public $_dscSituacao = [1=>'Ativo', 2=>'Inativo'];
 
-
-
     //Save New Register
     public function saveNew($arrData){
         //Cria Salt
@@ -49,9 +47,35 @@ class User extends Authenticatable
         $userModel->email    = $arrData['email'];
         $userModel->password = Hash::make($this->_criptoSenha($salt,$arrData['password']));
         $userModel->salt     = $salt;
-
         return $userModel->saveOrFail();
     }//save new
+
+    //Cadastra/Edita dados de usuario
+    public function salvarDados($array){
+        if(!isset($array['id'])){
+            $modelUsuario = new User();
+            $modelUsuario->salt  = $this->_createSalt();
+
+            if(isset($array['password'])&&$array['password']=='')
+                $modelUsuario->password =Hash::make($this->_criptoSenha($modelUsuario->salt,'teste'));
+        }else
+            $modelUsuario = $this->find($array['id']);
+
+        $modelUsuario->nome   = isset($array['nome'])?$array['nome']:'';
+        $modelUsuario->email  = isset($array['email'])?$array['email']:'';
+        $modelUsuario->ativo  = isset($array['ativo'])?$array['ativo']:1;
+        $modelUsuario->perfil = isset($array['perfil'])?$array['perfil']:2;
+        $modelUsuario->cep    = isset($array['cep'])?$array['cep']:null;
+        $modelUsuario->endereco = isset($array['endereco'])?$array['endereco']:null;
+
+        if(isset($array['password'])&&$array['password']!='')
+            $modelUsuario->password = Hash::make($this->_criptoSenha($modelUsuario->salt,$array['password']));
+
+        if($modelUsuario->save())
+            return $modelUsuario->id;
+        else
+            return false;
+    }//cadastrar
 
     //Funçao para criptografar a senha
     public function _criptoSenha($salt,$senha){

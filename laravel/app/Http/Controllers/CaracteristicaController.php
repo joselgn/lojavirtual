@@ -6,76 +6,67 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
-use App\Models\Categoria;
+use App\Models\Caracteristica;
 
-class CategoriaController extends Controller{
+class CaracteristicaController extends Controller{
     private $_dadosPessoais;
     private $_authInstance;
 
-    //Init Vars
+    //Init Vars / Auth
     public function _init()  {
         $this->_authInstance = Auth::user();
         $this->_dadosPessoais = ['nome'=>$this->_authInstance->nome,'email'=>$this->_authInstance->email];
 
         //somente admins para acessar essa parte
         if($this->_authInstance->perfil!=1){
-                return redirect()->route('home')->send();
+            return redirect()->route('home')->send();
         }//if
-    }//Init Vars
+    }//Init Vars / Auth
 
     //Iniciando a View
     public function index(){
-       $this->_init();
-       return view('categoria.index',['dadosPessoais'=>$this->_dadosPessoais]);
+        $this->_init();
+        return view('caracteristica.index',['dadosPessoais'=>$this->_dadosPessoais]);
     }//index action
 
-    //Tela para adicionar nova categoria
-    public function novo(Request $request){
+    //TELA - Novo registro
+    public function tela(Request $request){
         $this->_init();
-        $modelCategoria = new Categoria();
-
-        //Busca todas as categorias "PAI" ativas
-        $listaCategorias = $modelCategoria->where([
-            'ativo'=> 1, //Categorias ativas
-            'tipo' => 1, //Apenas categorias - Nao retorna subcategorias
-        ])->get();//lista categorias
+        $modelRegistro = new Caracteristica();
 
         //Verifica se possui categoria para ediçao
         if(isset($request->id) && $request->id!=null){
-            $dadosCategoria = $modelCategoria->where(['id'=>$request->id])->first();
+            $dadosRegistro = $modelRegistro->where(['id'=>$request->id])->first();
         }else{
-            $dadosCategoria = [];
-        }//if /; else dados categoria
+            $dadosRegistro = [];
+        }//if / else dados categoria
 
-        return view('categoria.novo',[
+        return view('caracteristica.tela-registro',[
             'dadosPessoais'=>$this->_dadosPessoais,
-            'listaCategorias'=>$listaCategorias,
-            'dadosCategoria' => $dadosCategoria,
+            'dadosRegistro' => $dadosRegistro,
         ]);//return to view
     }//novo Action
 
-
-    //Cadastrar nova Categoria
-    public function cadastrar(Request $request){
+    //CADASTRAR  / EDITAR -registro
+    public function salvar(Request $request){
         $erro = 0;
         $msg = '';
-        $modelCategoria = new Categoria();
+        $modelRegistro = new Caracteristica();
 
         //cadastra Novo
         $aCadastro = [
-            'nome'       => $request->nome,
-            'status'     => $request->status=='on'?1:2,
-            'id_cat_pai' => $request->cat_pai_id
+            'nome'     => $request->nome,
+            'ativo'    => $request->ativo=='on'?1:2,
         ];//aCadastro
 
-       //Verifica se add ou edita
+        //Verifica se add ou edita
         $flag = '';
         if($request->id!=null){
             $aCadastro['id'] = $request->id;
             $flag = 'edit';
         }//if id
 
-        $idRegistro = $modelCategoria->salvarDados($aCadastro);
+        $idRegistro = $modelRegistro->salvarDados($aCadastro);
         if($idRegistro!=false){
             $erro = 0;
             $msg  = 'Registro '.($flag=='edit'?'editado':'cadastrado').' com sucesso!';
@@ -84,12 +75,14 @@ class CategoriaController extends Controller{
             $msg  = 'Erro ao '.($flag=='edit'?'editar':'cadastrar').' dados!';
         }//if /else salvar dados
 
-        $url = '/categoria';
+        $url = '/caracteristica';
         $url .= ($idRegistro!=false ? '/'.$idRegistro:'');
 
         Session::flash('msg',$msg);
         return redirect($url)->with('error',$erro);
     }//Cadastrar action
+
+
 
 
     /************************************
@@ -98,9 +91,9 @@ class CategoriaController extends Controller{
 
     //Ajax de dados para a montagem da grid
     public function ajaxGrid(Request $request){
-        $modelCategoria = new Categoria();
-        $listaCategorias = $modelCategoria->all();
-        $totalLista = $listaCategorias->count();
+        $modelRegistro = new Caracteristica();
+        $listaregistros = $modelRegistro->all();
+        $totalLista = $listaregistros->count();
 
         //Dados enviados da grid
         $sidx  = $request->sidx;//Índice a ser ordenado
@@ -125,53 +118,37 @@ class CategoriaController extends Controller{
         $response['records'] = $totalLista;
 
         //Pesquisa lista paginada
-        $listaPaginada = $listaCategorias->forPage($page,$itensPagina);
-        $i=0;//Controle de indices
+        //$listaPaginada = $modelRegistro->count()>$itensPagina?$modelRegistro->forPage($page,$itensPagina):$listaregistros;
+        $listaPaginada = $listaregistros;
 
-        //dd($listaPaginada);
         $listaDados = array();
         foreach ($listaPaginada as $lst){
-            //Dados Cat Pai
-            if($lst->id_cat_pai != '')
-                $dadosCatPai = $modelCategoria->find($lst->id_cat_pai);
-
             $listaDados[] = array(
-                'nome'   => $lst->nome,
-                'status' => $modelCategoria->_dscAtivo[$lst->ativo],
-                'idPai'  => $lst->id_cat_pai!=''? ($dadosCatPai->count()>0 ? $dadosCatPai->nome :'' ) : '' ,
-                'edit'   => '<a href="categoria/'.$lst->id.'" title="Editar categoria: '.$lst->nome.'"><i class="icon-edit"></i></a>'
+                'nome'  => $lst->nome,
+                'ativo' => $modelRegistro->_dscStatus[$lst->ativo],
+                'edit'  => '<a href="caracteristica/'.$lst->id.'" title="Editar: '.$lst->nome.'"><i class="icon-edit"></i></a>'
             );
-            $i++;
         }//foreach
 
         echo json_encode([
             'TotalRows' => $listaPaginada->count(),
             'Rows' => $listaDados
-        ]);
-        exit;
+        ]);exit;
     }//AJax Grid
 
-    //Deleta uma categoria pelo id
+    //Deleta um registro
     public function delete(Request $request){
-        $modelCategoria = new Categoria();
-        $dadosCategoriaAtual = $modelCategoria->find($request->id);
+        $modelRegistro = new Caracteristica();
+        $dadosRegistroAtual = $modelRegistro->find($request->id);
 
-        //Verificar as relaçoes das categorias e deletar
-        //Verifica se possui alguma categoria com este ID como PAI
-        $catFilhos = $modelCategoria->where(['id_cat_pai'=>$dadosCategoriaAtual->id]);
-        if($catFilhos->count()>0){
-            $catFilhos->update(['id_cat_pai' => null,'tipo'=>1]);
-        }//if cat filhos
-
-        //Verifica os produtos relacionados a esta categoria e os remove desta categoria.
-
+        //Verificar as relaçoes do registro e deletar
+        //Verifica os relaciomentos deste registro
 
         //Deleta o Item atual
-        $dadosCategoriaAtual->delete();
+        $dadosRegistroAtual->delete();
 
-        Session::flash('msg','Categoria deletada e itens desvinculados com sucesso.');
-        echo json_encode(['erro'=>0,'msg'=>'Categoria deletada e itens desvinculados com sucesso.']);
+        echo json_encode(['erro'=>0,'msg'=>'Registro deletado e itens desvinculados com sucesso.']);
         exit;
     }//Ajax Delete
 
-}//Class
+}//class

@@ -22,16 +22,34 @@ Route::middleware('auth')->group(function () {
     //Home - Index Admin
     Route::get('/home', 'HomeController@index')->name('home');
 
-    //Categorias
+    //CATEGORIAS
     Route::get('/lista-categoria', 'CategoriaController@index');
     Route::get('/categoria/{id?}', 'CategoriaController@novo');
     Route::post('/categoria/{id?}','CategoriaController@cadastrar');
-    //GRID
+    //Grid
     Route::post('/ajax-categoria-grid','CategoriaController@ajaxGrid');//categoria
-    //DELETE
+    //Delete
     Route::delete('/ajax-categoria-delete/{id?}','CategoriaController@delete');//Categoria
 
 
+    //USUARIOS
+    Route::get('/lista-usuarios', 'UsuarioController@index');
+    Route::get('/usuario/{id?}', 'UsuarioController@tela');
+    Route::post('/usuario/{id?}','UsuarioController@salvar');
+    //Grid
+    Route::post('/ajax-usuario-grid','UsuarioController@ajaxGrid');
+    //Delete
+    Route::delete('/ajax-usuario-delete/{id?}','UsuarioController@delete'); //USUARIOS
+
+
+    //CARACTERISTICAS DO PRODUTO
+    Route::get('/lista-caracteristicas', 'CaracteristicaController@index');
+    Route::get('/caracteristica/{id?}', 'CaracteristicaController@tela');
+    Route::post('/caracteristica/{id?}','CaracteristicaController@salvar');
+    //Grid
+    Route::post('/ajax-caracteristica-grid','CaracteristicaController@ajaxGrid');
+    //Delete
+    Route::delete('/ajax-caracteristica-delete/{id?}','CaracteristicaController@delete');
 
 });//auth routes
 

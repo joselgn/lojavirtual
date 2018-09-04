@@ -1,27 +1,26 @@
-var catJS = {
+var scriptJS = {
     grid : function(){
         $.ajax({
             headers: {
                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             },
             type: 'POST',
-            url: 'ajax-categoria-grid',
+            url: 'ajax-caracteristica-grid',
             dataType: "json",
             data: {},
             success: function (data) {
                 var source = {
                     datatype: "json",
                     datafields: [
-                        {name: 'nome',   type: 'string'},
-                        {name: 'status', type: 'string'},
-                        {name: 'idPai',  type: 'string'},
-                        {name: 'edit',   type: 'number'}
+                        {name: 'nome',  type: 'string'},
+                        {name: 'ativo', type: 'string'},
+                        {name: 'edit',  type: 'number'}
                     ],
                     cache:false,
                     root:'Rows',
                     sort: function () {
                         // update the grid and send a request to the server.
-                        $("#grid-categoria").jqxGrid('updatebounddata', 'sort');
+                        $("#grid-lista").jqxGrid('updatebounddata', 'sort');
                     },
                     beforeprocessing: function (data) {
                         source.totalrecords = data.TotalRows;
@@ -35,7 +34,7 @@ var catJS = {
                             jqXHR.setRequestHeader('X-CSRF-Token',$('meta[name="csrf-token"]').attr('content')); }
                 });//data adapter
 
-                $("#grid-categoria").jqxGrid({
+                $("#grid-lista").jqxGrid({
                     width:      '100%',
                     source:     dataAdapter,
                     pageable:   true,
@@ -60,23 +59,15 @@ var catJS = {
                             datafield: 'nome',
                             align: 'center',
                             cellsalign: 'left',
-                            width: '35%'
+                            width: '55%'
                         },
                         {
                             text: 'Status',
                             columngroup: 'title',
-                            datafield: 'status',
+                            datafield: 'ativo',
                             align: 'center',
                             cellsalign: 'center',
-                            width: '15%'
-                        },
-                        {
-                            text: 'Categoria Pai',
-                            columngroup: 'title',
-                            datafield: 'idPai',
-                            align: 'center',
-                            cellsalign: 'left',
-                            width: '35%'
+                            width: '30%'
                         },
                         {
                             text: 'Editar',
@@ -88,13 +79,13 @@ var catJS = {
                         }
                     ],
                     columngroups: [
-                        {text: 'Lista de Categorias', align: 'center', name: 'title'}
+                        {text: 'Lista de Caracter&iacute;sticas', align: 'center', name: 'title'}
                     ]
                 });//grid
             }//success ajax
         });//AJAX
     },//start Grid
-    deleteCategoria : function(){
+    delete : function(){
         var id = $('#id').val();
 
         if(confirm('Tem certeza que deseja deletar esse item?')) {
@@ -103,7 +94,7 @@ var catJS = {
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'POST',
-                url: '../ajax-categoria-delete',
+                url: '../ajax-caracteristica-delete',
                 dataType: "json",
                 data: {
                     id : id,
@@ -113,9 +104,9 @@ var catJS = {
                     var erro = data.erro;
                     var msg  = data.msg;
 
-                    window.location='../lista-categoria'
+                    window.location='../lista-caracteristicas'
                 }//success
             });//AJAX
         }//if confirm
-    },//delete categoria
-};//catJS
+    },//delete
+};//JS

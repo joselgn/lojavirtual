@@ -1,27 +1,28 @@
-var catJS = {
+var userJS = {
     grid : function(){
         $.ajax({
             headers: {
                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             },
             type: 'POST',
-            url: 'ajax-categoria-grid',
+            url: 'ajax-usuario-grid',
             dataType: "json",
             data: {},
             success: function (data) {
                 var source = {
                     datatype: "json",
                     datafields: [
-                        {name: 'nome',   type: 'string'},
-                        {name: 'status', type: 'string'},
-                        {name: 'idPai',  type: 'string'},
-                        {name: 'edit',   type: 'number'}
+                        {name: 'nome',  type: 'string'},
+                        {name: 'email', type: 'string'},
+                        {name: 'ativo', type: 'string'},
+                        {name: 'perfil',type: 'string'},
+                        {name: 'edit',  type: 'number'}
                     ],
                     cache:false,
                     root:'Rows',
                     sort: function () {
                         // update the grid and send a request to the server.
-                        $("#grid-categoria").jqxGrid('updatebounddata', 'sort');
+                        $("#grid-usuarios").jqxGrid('updatebounddata', 'sort');
                     },
                     beforeprocessing: function (data) {
                         source.totalrecords = data.TotalRows;
@@ -35,7 +36,7 @@ var catJS = {
                             jqXHR.setRequestHeader('X-CSRF-Token',$('meta[name="csrf-token"]').attr('content')); }
                 });//data adapter
 
-                $("#grid-categoria").jqxGrid({
+                $("#grid-usuarios").jqxGrid({
                     width:      '100%',
                     source:     dataAdapter,
                     pageable:   true,
@@ -60,23 +61,31 @@ var catJS = {
                             datafield: 'nome',
                             align: 'center',
                             cellsalign: 'left',
-                            width: '35%'
+                            width: '30%'
+                        },
+                        {
+                            text: 'Email',
+                            columngroup: 'title',
+                            datafield: 'email',
+                            align: 'center',
+                            cellsalign: 'left',
+                            width: '25%'
                         },
                         {
                             text: 'Status',
                             columngroup: 'title',
-                            datafield: 'status',
+                            datafield: 'ativo',
                             align: 'center',
                             cellsalign: 'center',
                             width: '15%'
                         },
                         {
-                            text: 'Categoria Pai',
+                            text: 'Perfil',
                             columngroup: 'title',
-                            datafield: 'idPai',
+                            datafield: 'perfil',
                             align: 'center',
-                            cellsalign: 'left',
-                            width: '35%'
+                            cellsalign: 'center',
+                            width: '20%'
                         },
                         {
                             text: 'Editar',
@@ -84,17 +93,17 @@ var catJS = {
                             datafield: 'edit',
                             align: 'center',
                             cellsalign: 'center',
-                            width: '15%'
+                            width: '10%'
                         }
                     ],
                     columngroups: [
-                        {text: 'Lista de Categorias', align: 'center', name: 'title'}
+                        {text: 'Lista de Usu&aacute;rios', align: 'center', name: 'title'}
                     ]
                 });//grid
             }//success ajax
         });//AJAX
     },//start Grid
-    deleteCategoria : function(){
+    delete : function(){
         var id = $('#id').val();
 
         if(confirm('Tem certeza que deseja deletar esse item?')) {
@@ -103,7 +112,7 @@ var catJS = {
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'POST',
-                url: '../ajax-categoria-delete',
+                url: '../ajax-usuario-delete',
                 dataType: "json",
                 data: {
                     id : id,
@@ -113,9 +122,9 @@ var catJS = {
                     var erro = data.erro;
                     var msg  = data.msg;
 
-                    window.location='../lista-categoria'
+                    window.location='../lista-usuarios'
                 }//success
             });//AJAX
         }//if confirm
-    },//delete categoria
-};//catJS
+    },//delete
+};//JS

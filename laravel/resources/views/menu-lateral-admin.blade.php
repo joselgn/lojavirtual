@@ -16,8 +16,8 @@
         </li>
         <li class="subMenu"><a> Menu Usuarios  <i class="icon-arrow-right"></i> </a>
             <ul style="display:none">
-                <li><a href="{{ url('/home') }}"><i class="icon-save"></i> Adicionar Usuario</a></li>
-                <li><a href="{{ url('/home') }}"><i class="icon-list"></i> Visualizar Usuarios</a></li>
+                <li><a href="{{ url('/usuario') }}"><i class="icon-save"></i> Adicionar Usuario</a></li>
+                <li><a href="{{ url('/lista-usuarios') }}"><i class="icon-list"></i> Visualizar Usuarios</a></li>
             </ul>
         </li>
         <li class="subMenu"><a> Menu Categoria  <i class="icon-arrow-right"></i> </a>
@@ -28,9 +28,10 @@
         </li>
         <li class="subMenu"><a> Menu Produtos  <i class="icon-arrow-right"></i> </a>
             <ul style="display:none">
+                <li><a href="{{ url('/caracteristica') }}"><i class="icon-save"></i> Adicionar Caracter&iacute;sticas</a></li>
+                <li><a href="{{ url('/lista-caracteristicas') }}"><i class="icon-list"></i> Visualizar Caracter&iacute;sticas</a></li>
                 <li><a href="{{ url('/home') }}"><i class="icon-save"></i> Adicionar Produto</a></li>
-                <li><a href="{{ url('/home') }}"><i class="icon-list"></i> Lista de Produtos</a></li>
-                <li><a href="{{ url('/home') }}"><i class="icon-list"></i> Caracteristicas de Produtos</a></li>
+                <li><a href="{{ url('/home') }}"><i class="icon-list"></i> Visualizar Produtos</a></li>
             </ul>
         </li>
         <li class="subMenu"><a> Menu Pedidos  <i class="icon-arrow-right"></i> </a>
