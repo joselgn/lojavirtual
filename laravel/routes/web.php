@@ -51,5 +51,9 @@ Route::middleware('auth')->group(function () {
     //Delete
     Route::delete('/ajax-caracteristica-delete/{id?}','CaracteristicaController@delete');
 
+
+    //PRODUTOS
+    
+
 });//auth routes
 
