@@ -151,6 +151,44 @@ class CategoriaController extends Controller{
         exit;
     }//AJax Grid
 
+    //Busca uma lista de registros de acordo com uma condiçao
+    public function ajaxBusca(Request $request){
+        $condicoes = $request->all();
+        $modelRegistros = new Categoria();
+
+        //trata os campos passados
+        $where = [];
+        if(count($condicoes)>0){
+            $camposPossiveis = $modelRegistros->getFillable();
+            foreach($condicoes as $campo => $valor){
+                if(in_array($campo,$camposPossiveis)){
+                    if(!empty($valor))
+                        $where[$campo]=$valor;
+                }//if campos possiveis
+            }//foreach array condicoes where
+        }//if condicoes
+
+        //Buscando Registros
+        $listaRegistros = $modelRegistros->where($where)->orderBy('nome','ASC')->get();
+
+        //Retorna label de identificaçao
+        $retorno=[];
+        foreach ($listaRegistros as $registro) {
+            if($registro->tipo==1)
+                $label = '';
+            else{
+                $dadosRegistro = $registro->id_cat_pai!='' ? $modelRegistros->where(['id'=>$registro->id_cat_pai])->first()->nome : '';
+                $label = ' ~> SubCategoria de '.$dadosRegistro;
+            }//if / else label subcategoria
+
+            $retorno[]=[
+                'id' => $registro->id,
+                'nome'=> $registro->nome.''.$label,
+            ];
+        }//foreach
+        echo json_encode($retorno);exit;
+    }//Ajx Busca
+
     //Deleta uma categoria pelo id
     public function delete(Request $request){
         $modelCategoria = new Categoria();

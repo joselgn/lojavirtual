@@ -134,12 +134,12 @@
                     </div>
                     <div id="socialMedia" class="span3 pull-right">
                         <h5>SOCIAL MEDIA </h5>
-                        <a href="#"><img width="60" height="60" src="{{ asset('libraries/bootstrap-shop/themes/images/facebook.png') }}" title="facebook" alt="facebook"/></a>
-                        <a href="#"><img width="60" height="60" src="{{ asset('libraries/bootstrap-shop/themes/images/twitter.png') }}" title="twitter" alt="twitter"/></a>
-                        <a href="#"><img width="60" height="60" src="{{ asset('libraries/bootstrap-shop/themes/images/youtube.png') }}" title="youtube" alt="youtube"/></a>
+                        <a href="https://www.linkedin.com/in/jose-carlos-fernandes-1033864a/" target="_blank"><img width="60" height="60" src="{{ asset('libraries/bootstrap-shop/themes/images/linked-in2.png') }}" title="Linked-in: Jose Carlos Fernandes" alt="Linked-In"/></a>
+                        <a href="https://github.com/joselgn" target="_blank"><img width="60" height="60" src="{{ asset('libraries/bootstrap-shop/themes/images/github2.png') }}" title="Github: Jose Carlos Fernandes" alt="Github"/></a>
+                        <!--<a href="#"><img width="60" height="60" src="{{ asset('libraries/bootstrap-shop/themes/images/youtube.png') }}" title="youtube" alt="youtube"/></a>-->
                     </div>
                 </div>
-                <p class="pull-right">&copy; Bootshop</p>
+                <p class="pull-right">Desenvolvido por: <br/> Jose Carlos Fernandes e Fernandes Filho</p>
             </div><!-- Container End -->
         </div>
         <!-- Footer END ================================================================== -->
@@ -158,13 +158,16 @@
 
         <!-- Scripts Libraries JqxWidgets-->
         <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxcore.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxdata.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxbuttons.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxscrollbar.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxmenu.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxcheckbox.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxlistbox.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxcombobox.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxdata.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxdropdownlist.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxlistbox.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxmenu.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxpanel.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxscrollbar.js') }}"></script>
+
         <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxgrid.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxgrid.sort.js') }}"></script>
         <script type="text/javascript" src="{{ asset('libraries/jqwidgets/jqxgrid.pager.js') }}"></script>

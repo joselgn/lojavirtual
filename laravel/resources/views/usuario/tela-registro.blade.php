@@ -3,6 +3,15 @@
 
 @section('scripts')
     <script type="text/javascript" src="{{ asset('js/usuarios/script.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //Btn delete
+            $('#btnDelete').on('click',function(){
+                userJS.delete();
+            });//btn delete
+        });//$.function
+    </script>
 @endsection
 
 @section('conteudo')
@@ -101,9 +110,7 @@
                 <!-- ENDEREÇO -->
                 <div class="control-group">
                     <label class="label label-success alignL" for="endereco" > Endereço </label><br/>
-                    <textarea id="endereco" name="endereco" class="alignL form-control{{ $errors->has('endereco') ? '-is-invalid' : '' }}" placeholder="Endereço">
-                        <?php echo isset($dadosRegistro->endereco)?trim($dadosRegistro->endereco):'' ?>
-                    </textarea>
+                    <textarea id="endereco" name="endereco" class="alignL form-control{{ $errors->has('endereco') ? '-is-invalid' : '' }}" placeholder="Endereço"><?php echo isset($dadosRegistro->endereco)?trim($dadosRegistro->endereco):'' ?></textarea>
                 </div>
 
                 <!-- BOTOES -->
@@ -122,15 +129,5 @@
             </form>
         </div>
     </div>
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-            //Btn delete
-            $('#btnDelete').on('click',function(){
-                catJS.delete();
-            });//btn delete
-        });//$.function
-    </script>
-
 
 @endsection

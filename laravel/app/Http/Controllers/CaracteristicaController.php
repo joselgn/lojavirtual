@@ -136,6 +136,29 @@ class CaracteristicaController extends Controller{
         ]);exit;
     }//AJax Grid
 
+    //Busca uma lista de registros de acordo com uma condiçao
+    public function ajaxBusca(Request $request){
+        $condicoes = $request->all();
+        $modelRegistros = new Caracteristica();
+
+        //trata os campos passados
+        $where = [];
+        if(count($condicoes)>0){
+            $camposPossiveis = $modelRegistros->getFillable();
+            foreach($condicoes as $campo => $valor){
+                if(in_array($campo,$camposPossiveis)){
+                    if(!empty($valor))
+                        $where[$campo]=$valor;
+                }//if campos possiveis
+            }//foreach array condicoes where
+        }//if condicoes
+
+        //Buscando Registros
+        $listaRegistros = $modelRegistros->where($where)->orderBy('nome','ASC')->get();
+        echo json_encode($listaRegistros);exit;
+    }//Ajx Busca
+
+
     //Deleta um registro
     public function delete(Request $request){
         $modelRegistro = new Caracteristica();

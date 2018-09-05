@@ -26,7 +26,7 @@ class Produto extends Model{
 
         $modelRegistro->nome   = isset($array['nome'])?$array['nome']:'';
         $modelRegistro->ativo  = isset($array['ativo'])?$array['ativo']:1;
-        $modelRegistro->preco  = isset($array['preco'])?$array['preco']:1;
+        $modelRegistro->preco  = isset($array['preco'])?$array['preco']:0.00;
         $modelRegistro->url_imagem  = isset($array['url_imagem'])?$array['url_imagem']:null;
         $modelRegistro->descricao  = isset($array['descricao'])?$array['descricao']:null;
 
@@ -35,4 +35,15 @@ class Produto extends Model{
         else
             return false;
     }//cadastrar
+
+    //Cadastra Vinculo produto / Caracteristica
+    public function vinculoProdCarac($idProduto,$arrayIdsCarac){
+        $table = 'vin_prod_carac';
+
+        foreach($arrayIdsCarac as $id){
+            $sql = 'INSERT INTO '.$table.' (id_prod,id_carac) VALUES ('.$idProduto.','.$id.');';
+
+        }//foreach ids
+    }//Vincula produtos e caracteristicas
+
 }//Class

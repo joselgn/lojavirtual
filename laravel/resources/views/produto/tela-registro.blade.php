@@ -2,10 +2,32 @@
 @extends('menu-lateral-admin');
 
 @section('scripts')
-    <script type="text/javascript" src="{{ asset('js/caracteristicas/script.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/produtos/script.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function(){
+            //Carrega a combo de caracteristicas
+            scriptJS.comboCaracteristicas();
+            scriptJS.comboCategorias();
+
+            //Alimentando Inputs
+            $('#comboCaracteristicas').on('change', function (event){
+                var checkedItems = "";
+                var items = $(this).jqxComboBox('getSelectedItems');
+                $.each(items, function (index) {
+                    checkedItems += this.value + ",";
+                });
+                $('#caracteristicas').val(checkedItems.slice(0, -1));
+            });//alimenta Input
+            $('#comboCategorias').on('change', function (event){
+                 var checkedItems = "";
+                 var items = $(this).jqxComboBox('getSelectedItems');
+                 $.each(items, function (index) {
+                     checkedItems += this.value + ",";
+                 });
+                 $('#categorias').val(checkedItems.slice(0, -1));
+            });//alimenta Input
+
             //Btn delete
             $('#btnDelete').on('click',function(){
                 scriptJS.delete();
@@ -19,7 +41,7 @@
     <div class="container">
         <!-- CATEGORIAS -->
         <div class="well well-small pagination-centered">
-            <h3 class="themeTitle">Controle de Caracter&iacute;sticas</h3>
+            <h3 class="themeTitle">Controle de Produtos</h3>
             <hr/>
 
             <!-- Formulario -->
@@ -38,15 +60,15 @@
                 @endif
             @endif
 
-            <form class="form-horizontal alignL" method="POST" action="{{ url('/caracteristica') }}">
+            <form class="form-horizontal alignL span12" method="POST" action="{{ url('/produto') }}">
                 @csrf
 
                 <input type="hidden" id="id" name="id" value="<?php echo isset($dadosRegistro->id)?$dadosRegistro->id:'' ?>">
 
                 <!-- NOME -->
-                <div class="control-group">
+                <div class="control-group span5">
                     <label class="label label-success alignL" for="nome" > Nome </label><br/>
-                    <input id="nome" type="text" class="form-control{{ $errors->has('nome') ? '-is-invalid' : '' }}" name="nome" value="<?php echo isset($dadosRegistro->nome)?$dadosRegistro->nome:'' ?>" required autofocus placeholder="Nome">
+                    <input id="nome" type="text" class="form-control{{ $errors->has('nome') ? '-is-invalid' : '' }} span5" name="nome" value="<?php echo isset($dadosRegistro->nome)?$dadosRegistro->nome:'' ?>" required autofocus placeholder="Nome">
 
                     @if ($errors->has('nome'))
                         <span class="invalid-feedback" role="alert">
@@ -56,15 +78,55 @@
                 </div>
 
                 <!-- ATIVO -->
-                <div class="control-group">
+                <div class="control-group  span5">
                     <label class="label label-success alignL" for="ativo" > Status </label><br/>
                     <?php $checked = isset($dadosRegistro->ativo) ? ($dadosRegistro->ativo==1 ? 'checked' : ''):'' ?>
                     <input id="ativo" name="ativo" type="checkbox" <?=$checked?> class="form-control{{ $errors->has('ativo') ? '-is-invalid' : '' }}" placeholder="Status">
                     Ativo
                 </div>
 
+
+                <!-- PREÇO -->
+                <div class="control-group  span5">
+                    <label class="label label-success alignL" for="preco" > Preço </label><br/>
+                    R$ <input id="preco" name="preco" type="text" class="form-control{{ $errors->has('ativo') ? '-is-invalid' : '' }} span4" value="<?php echo isset($dadosRegistro->preco) ? number_format($dadosRegistro->preco,2,',','.'): '' ?>" required placeholder="Preço">
+
+                    @if ($errors->has('preco'))
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('preco') }}</strong>
+                    </span>
+                    @endif
+                </div>
+
+                <!-- DESCRIÇAO -->
+                <div class="control-group  span5">
+                    <label class="label label-success alignL" for="descricao" > Descriç&atilde;o </label><br/>
+                    <textarea id="descricao" name="descricao" class="alignL form-control{{ $errors->has('descricao') ? '-is-invalid' : '' }} span5" placeholder="Descriç&atilde;o"><?php echo isset($dadosRegistro->descricao) ? trim($dadosRegistro->descricao) : '' ?></textarea>
+
+                    @if ($errors->has('preco'))
+                        <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('preco') }}</strong>
+                    </span>
+                    @endif
+                </div>
+
+                <!-- CARACTERISTICAS DO PRODUTO -->
+                <div class="control-group  span5">
+                    <label class="label label-success alignL" for="caracteristicas" > Caracter&iacute;sticas </label><br/>
+                    <div style="margin-top: 5px;" id="comboCaracteristicas" title="Digite para começar ou clique na seta ao lado!"></div>
+                    <input type="hidden" id="caracteristicas" name="caracteristicas" value="">
+                </div>
+
+                <!-- CATEGORIAS DO PRODUTO -->
+                <div class="control-group  span5">
+                    <label class="label label-success alignL" for="categorias" > Categorias </label><br/>
+                    <div style="margin-top: 5px;" id="comboCategorias"></div>
+                    <input type="hidden" id="categorias" name="categorias" value="">
+                </div>
+
+
                 <!-- BOTOES -->
-                <div class="control-group">
+                <div class="control-group span12">
                     <button type="submit" class="btn btn-primary">
                         <?php echo isset($dadosRegistro->id) ? 'Editar' : 'Cadastrar'; ?>
                     </button>

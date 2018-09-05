@@ -2,7 +2,7 @@
 @extends('menu-lateral-admin');
 
 @section('scripts')
-    <script type="text/javascript" src="{{ asset('js/caracteristicas/script.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/produtos/script.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function(){
@@ -17,7 +17,7 @@
     <div class="container">
         <!-- TITLE -->
         <div class="well well-small pagination-centered">
-            <h3 class="themeTitle">Controle de Caracter&iacute;sticas</h3>
+            <h3 class="themeTitle">Controle de Produtos</h3>
         </div>
 
         <!-- GRID -->
