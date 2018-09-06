@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use http\QueryString;
+use Illuminate\Support\Facades\DB;
 
 class Produto extends Model{
     /**
@@ -36,14 +38,55 @@ class Produto extends Model{
             return false;
     }//cadastrar
 
+    //Pesquisa os Vinculos da tabela
+    //$campo == [id_prod || id_carac]
+    public function vinculoProdCaracPsq($campo,$valor){
+        $sql = DB::select('SELECT * FROM vin_prod_carac WHERE '.$campo.'='.$valor);
+        return $sql;
+    }//Pesquisa vinculos
+
     //Cadastra Vinculo produto / Caracteristica
-    public function vinculoProdCarac($idProduto,$arrayIdsCarac){
-        $table = 'vin_prod_carac';
-
-        foreach($arrayIdsCarac as $id){
-            $sql = 'INSERT INTO '.$table.' (id_prod,id_carac) VALUES ('.$idProduto.','.$id.');';
-
-        }//foreach ids
+    public function vinculoProdCarac($idProduto,$idCarac){
+            $sql = DB::insert('INSERT INTO vin_prod_carac (id_prod, id_carac) values (?, ?)', [$idProduto,$idCarac]);
+            if($sql)
+                return true;
+            else
+                return false;
     }//Vincula produtos e caracteristicas
+
+    //Exclui Vinculos caracteristicas dos produtos
+    public function vinculoProdCaracDelete($idProduto){
+        $sql = DB::delete('DELETE FROM vin_prod_carac WHERE id_prod='.$idProduto);
+        if($sql)
+            return true;
+        else
+            return false;
+    }//exclui vinculos produto caracteristica
+
+    //Pesquisa os Vinculos da tabela
+    //$campo == [id_prod || id_carac]
+    public function vinculoProdCategPsq($campo,$valor){
+        $sql = DB::select('SELECT * FROM vin_prod_categ WHERE '.$campo.'='.$valor);
+        return $sql;
+    }//Pesquisa vinculos
+
+    //Cadastra Vinculo produto / Categorias
+    public function vinculoProdCateg($idProduto,$idCat){
+            $sql = DB::insert('INSERT INTO vin_prod_categ (id_prod, id_categ) values (?, ?)', [$idProduto,$idCat]);
+            if($sql)
+                return true;
+            else
+                return false;
+    }//Vincula produtos e caracteristicas
+
+    //Exclui Vinculos Categoria dos produtos
+    public function vinculoProdCategDelete($idProduto){
+        $sql = DB::delete('DELETE FROM vin_prod_categ WHERE id_prod='.$idProduto);
+        if($sql)
+            return true;
+        else
+            return false;
+    }//exclui vinculos produto categoria
+
 
 }//Class

@@ -102,7 +102,7 @@ var scriptJS = {
                     'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'POST',
-                url: '../ajax-produto-delete',
+                url: top.baseURL+'/ajax-produto-delete',
                 dataType: "json",
                 data: {
                     id : id,
@@ -123,7 +123,7 @@ var scriptJS = {
                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             },
             type: 'POST',
-            url: '../ajax-caracteristica-busca',
+            url: top.baseURL+'/ajax-caracteristica-busca',
             dataType: "json",
             data: {
                 ativo : 1
@@ -141,7 +141,15 @@ var scriptJS = {
                 };//config
 
                 var source = new $.jqx.dataAdapter(config);
-                $("#comboCaracteristicas").jqxComboBox({source: source, multiSelect: true, displayMember: "nome", valueMember: "id", width: 350, height: 30});
+                $("#comboCaracteristicas").jqxListBox({
+                    source: source, multiple: true, displayMember: "nome", valueMember: "id",width: 350, height: 400});
+
+                //Populando as combobox
+                var arrCarac =$("#valuesCarac").val().split(',');
+                $(arrCarac).each(function(index,id){
+                    var item = $("#comboCaracteristicas").jqxListBox('getItemByValue', id);
+                    $("#comboCaracteristicas").jqxListBox('selectIndex',item.index) ;
+                });
             }//success
         });//Ajax
     },//Combo Caracteristicas
@@ -151,7 +159,7 @@ var scriptJS = {
                 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             },
             type: 'POST',
-            url: '../ajax-categoria-busca',
+            url: top.baseURL+'/ajax-categoria-busca',
             dataType: "json",
             data: {
                 ativo : 1
@@ -169,8 +177,23 @@ var scriptJS = {
                 };//config
 
                 var source = new $.jqx.dataAdapter(config);
-                $("#comboCategorias").jqxComboBox({source: source, multiSelect: true, displayMember: "nome", valueMember: "id", width: 350, height: 30});
+                $("#comboCategorias").jqxListBox({source: source, multiple: true, displayMember: "nome", valueMember: "id", width: 350, height: 400});
+                //Populando as combobox
+                var arrCarac =$("#valuesCateg").val().split(',');
+                $(arrCarac).each(function(index,id){
+                    var item = $("#comboCategorias").jqxListBox('getItemByValue', id);
+                    $("#comboCategorias").jqxListBox('selectIndex',item.index) ;
+                });
             }//success
         });//Ajax
     },//Combo Caracteristicas
+    readURL: function (input){
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#foto').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    },//imagem preview
 };//JS

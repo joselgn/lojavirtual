@@ -30,6 +30,10 @@
 
         <!-- Scripts Libraries-->
         <script type="text/javascript" src="{{ asset('libraries/js/jquery.js') }}"></script>
+
+        <script type="text/javascript">
+            top.baseURL = "<?= url('/'); ?>";
+        </script>
     </head>
     <body>
         <!-- Header ================================================== -->

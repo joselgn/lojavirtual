@@ -12,8 +12,9 @@
 
             //Alimentando Inputs
             $('#comboCaracteristicas').on('change', function (event){
+                console.log('change');
                 var checkedItems = "";
-                var items = $(this).jqxComboBox('getSelectedItems');
+                var items = $(this).jqxListBox('getSelectedItems');
                 $.each(items, function (index) {
                     checkedItems += this.value + ",";
                 });
@@ -21,12 +22,18 @@
             });//alimenta Input
             $('#comboCategorias').on('change', function (event){
                  var checkedItems = "";
-                 var items = $(this).jqxComboBox('getSelectedItems');
+                 var items = $(this).jqxListBox('getSelectedItems');
                  $.each(items, function (index) {
                      checkedItems += this.value + ",";
                  });
                  $('#categorias').val(checkedItems.slice(0, -1));
             });//alimenta Input
+
+            //Foto / imagem
+            $("#imgProfile").change(function() {
+                scriptJS.readURL(this);
+            });//foto
+
 
             //Btn delete
             $('#btnDelete').on('click',function(){
@@ -115,13 +122,23 @@
                     <label class="label label-success alignL" for="caracteristicas" > Caracter&iacute;sticas </label><br/>
                     <div style="margin-top: 5px;" id="comboCaracteristicas" title="Digite para começar ou clique na seta ao lado!"></div>
                     <input type="hidden" id="caracteristicas" name="caracteristicas" value="">
+                    <input type="hidden" id="valuesCarac" name="valuesCarac" value="<?= !empty($vinCarac)?$vinCarac:'' ?>">
                 </div>
 
                 <!-- CATEGORIAS DO PRODUTO -->
                 <div class="control-group  span5">
                     <label class="label label-success alignL" for="categorias" > Categorias </label><br/>
                     <div style="margin-top: 5px;" id="comboCategorias"></div>
-                    <input type="hidden" id="categorias" name="categorias" value="">
+                    <input type="hidden" id="categorias" name="categorias"  value="">
+                    <input type="hidden" id="valuesCateg" name="valuesCateg" value="<?= !empty($vinCateg)?$vinCateg:'' ?>">
+                </div>
+
+                <!-- IMAGEM DO PRODUTO -->
+                <div class="control-group  span5">
+                    <label class="label label-success alignL" for="img" > Imagem </label><br/>
+
+                    <input type='file' id="imgProfile" name="imgProfile"/>
+                    <img id="foto" src="#" alt="Foto Imagem" />
                 </div>
 
 
@@ -130,7 +147,6 @@
                     <button type="submit" class="btn btn-primary">
                         <?php echo isset($dadosRegistro->id) ? 'Editar' : 'Cadastrar'; ?>
                     </button>
-
                     <?php
                         if(isset($dadosRegistro->id) && $dadosRegistro->id!=''){
                             echo '<button type="button" id="btnDelete" name="btnDelete" class="btn btn-danger">

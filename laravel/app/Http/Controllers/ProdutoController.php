@@ -40,13 +40,31 @@ class ProdutoController extends Controller{
         //Verifica se possui dados para ediçao
         if(isset($request->id) && $request->id!=null){
             $dadosRegistro = $modelRegistro->where(['id'=>$request->id])->first();
+
+            //Pesquisa vinculos
+            $vincCarac = $modelRegistro->vinculoProdCaracPsq('id_prod',$request->id);//Caracteristicas
+            $aCarac = [];
+            foreach ($vincCarac as $carac){
+                $aCarac []= $carac->id_carac;
+            }//foreach carac
+
+            $vincCateg = $modelRegistro->vinculoProdCategPsq('id_prod',$request->id);//Categorias
+            $aCateg = [];
+            foreach ($vincCateg as $dados){
+                //$aCateg []=  $dados->id_categ.'_'.$dadosCateg->nome;
+                $aCateg []=$dados->id_categ;
+            }//foreach categ
         }else{
             $dadosRegistro = [];
+            $aCarac = [];
+            $aCateg = [];
         }//if / else dados
 
         return view('produto.tela-registro',[
             'dadosPessoais'=>$this->_dadosPessoais,
             'dadosRegistro' => $dadosRegistro,
+            'vinCarac' =>implode(',',$aCarac),
+            'vinCateg' => implode(',',$aCateg),
         ]);//return to view
     }//novo Action
 
@@ -66,8 +84,12 @@ class ProdutoController extends Controller{
             //itens para Vincular
             'caracteristicas' => $request->caracteristicas!=''?explode(',',$request->caracteristicas):null,
             'categorias' => $request->categorias!=''?explode(',',$request->categorias):null,
-        //Verifica se add ou edita
+            'foto' =>$request->imgProfile,
         ];//aCadastro
+
+        echo '<pre/>';
+        var_dump($aCadastro['foto']);
+        exit;
 
         $flag = '';
         if($request->id!=null){
@@ -79,15 +101,31 @@ class ProdutoController extends Controller{
         if($idRegistro!=false){
             //Verifica as vinculaçoes
             //Caracteristicas
+            $dbCarac = '';
             if($aCadastro['caracteristicas']!=null){
+                $delVinculos = $modelRegistro->vinculoProdCaracDelete($idRegistro);
 
+                foreach ($aCadastro['caracteristicas'] as $id){
+                    $dbCarac = $modelRegistro->vinculoProdCarac($idRegistro,$id);
+                }//foreach
             }//Caracteristicas
 
+            $dbCateg = '';
+            if($aCadastro['categorias']!=null){
+                $delVinculos2 = $modelRegistro->vinculoProdCategDelete($idRegistro);
 
+                foreach ($aCadastro['categorias'] as $id){
+                    $dbCateg = $modelRegistro->vinculoProdCateg($idRegistro,$id);
+                }//foreach
+            }//Categoria
 
-
-            $erro = 0;
-            $msg  = 'Registro '.($flag=='edit'?'editado':'cadastrado').' com sucesso!';
+            if($dbCarac==false || $dbCateg==false){
+                $erro = 1;
+                $msg  = 'Erro ao adicionar dados do produto [Caracteristica ou Categorias]';
+            }else{
+                $erro = 0;
+                $msg  = 'Registro '.($flag=='edit'?'editado':'cadastrado').' com sucesso!';
+            }//if / else finaliza CRUD
         }else{
             $erro = 1;
             $msg  = 'Erro ao '.($flag=='edit'?'editar':'cadastrar').' dados!';
