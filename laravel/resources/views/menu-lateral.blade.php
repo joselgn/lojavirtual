@@ -12,41 +12,27 @@
 
     <!-- CATEGORIAS -->
     <ul id="sideManu" class="nav nav-tabs nav-stacked">
-        <li class="subMenu open"><a> ELECTRONICS [230]</a>
-            <ul>
-                <li><a class="active" href="products.html"><i class="icon-chevron-right"></i>Cameras (100) </a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Computers, Tablets & laptop (30)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Mobile Phone (80)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Sound & Vision (15)</a></li>
-            </ul>
-        </li>
-        <li class="subMenu"><a> CLOTHES [840] </a>
-            <ul style="display:none">
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Women's Clothing (45)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Women's Shoes (8)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Women's Hand Bags (5)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Men's Clothings  (45)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Men's Shoes (6)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Kids Clothing (5)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Kids Shoes (3)</a></li>
-            </ul>
-        </li>
-        <li class="subMenu"><a>FOOD AND BEVERAGES [1000]</a>
-            <ul style="display:none">
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Angoves  (35)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Bouchard Aine & Fils (8)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>French Rabbit (5)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Louis Bernard  (45)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>BIB Wine (Bag in Box) (8)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Other Liquors & Wine (5)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Garden (3)</a></li>
-                <li><a href="products.html"><i class="icon-chevron-right"></i>Khao Shong (11)</a></li>
-            </ul>
-        </li>
-        <li><a href="products.html">HEALTH & BEAUTY [18]</a></li>
-        <li><a href="products.html">SPORTS & LEISURE [58]</a></li>
-        <li><a href="products.html">BOOKS & ENTERTAINMENTS [14]</a></li>
-    </ul>
+        <?php
+            $menu = $layout['menu'];
+            if(count($menu)>0){
+                foreach($menu as $item){
+                    if(count($item['submenu'])>0){
+                        echo '<li class="subMenu open" style="cursor: pointer;"><a>'.$item["nome"].'<i class="icon-chevron-down"></i></a>';
+                            //Percorre submenus
+                            echo '<ul style="display:none">';
+                            foreach ($item["submenu"] as $submenu){
+                                    echo '<li><a href="/submenu/'.$submenu['id'].'"><i class="icon-chevron-right"></i>'.$submenu["nome"].'<i class="icon-link"></i></a></li>';
+                            }//foreach submenu
+                            echo '</ul>';
+                        echo '</li>';//fecha menu
+                    }else{
+                        echo '<li><a href="/menu/'.$item['id'].'">'.$item["nome"].'<i class="icon-link"></i></a></li>';
+                    }//if / else submenu
+                }//foreach
+            }else{
+                echo '<li><a href="/">Sem categorias cadastradas <i class="icon-link"></i></li>';
+            }//if / else categorias
+        ?>
     <!-- CATEGORIAS END -->
 
 

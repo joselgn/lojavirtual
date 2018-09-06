@@ -4,6 +4,10 @@
         <div class="row-fluid">
             <div id="featured" class="carousel slide">
                 <div class="carousel-inner">
+
+
+
+
                     <div class="item active">
                         <ul class="thumbnails">
                             <li class="span3">
@@ -48,6 +52,9 @@
                             </li>
                         </ul>
                     </div>
+
+
+
                     <div class="item">
                         <ul class="thumbnails">
                             <li class="span3">
@@ -130,6 +137,7 @@
                             </li>
                         </ul>
                     </div>
+                    
                     <div class="item">
                         <ul class="thumbnails">
                             <li class="span3">
@@ -170,6 +178,10 @@
                             </li>
                         </ul>
                     </div>
+
+
+
+
                 </div>
                 <a class="left carousel-control" href="#featured" data-slide="prev">‹</a>
                 <a class="right carousel-control" href="#featured" data-slide="next">›</a>
