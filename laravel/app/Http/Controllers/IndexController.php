@@ -19,6 +19,8 @@ class IndexController extends Controller{
     public function _initLayout(){
         return [
             'menu' => $this->_montaMenuLateral(),
+            'lastProds' => $this->_ultimosProdutos(),
+            'allProds' =>$this->_listaProdutos(),
         ];
     }//init layout
 

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 //Models
 use App\Models\Categoria;
+use App\Models\Produto;
 
 class Controller extends BaseController{
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -52,5 +53,43 @@ class Controller extends BaseController{
 
         return $arrayMenu;
     }//menu lateral
+
+    //Últimos Produtos cadastrados
+    public function _ultimosProdutos(){
+        $modelProdutos = new Produto();
+        $listaProds = $modelProdutos->where(['ativo'=>1])->orderBy('created_at','Desc')->take(8)->get();
+
+        $arrayProds=[];
+        foreach ($listaProds as $prod){
+            $arrayProds[] =[
+                'id'=> $prod->id,
+                'nome'=> $prod->nome,
+                'preco'=> 'R$ '.number_format($prod->preco,2,',','.'),
+                'img'=>'img-up/'.$prod->url_imagem,
+            ];
+        }//foreach array prods
+
+        return $arrayProds;
+    }//ultimos produtos
+
+
+    //Toda a lista de Prddutos ativos
+    public function _listaProdutos(){
+        $modelProdutos = new Produto();
+        $listaProds = $modelProdutos->where(['ativo'=>1])->get();
+
+        $arrayProds=[];
+        foreach ($listaProds as $prod){
+            $arrayProds[] =[
+                'id'=> $prod->id,
+                'nome'=> $prod->nome,
+                'preco'=> 'R$ '.number_format($prod->preco,2,',','.'),
+                'img'=>'img-up/'.$prod->url_imagem,
+                'desc'=>$prod->descricao,
+            ];
+        }//foreach array prods
+
+        return $arrayProds;
+    }//lista produtos
 
 }//class
