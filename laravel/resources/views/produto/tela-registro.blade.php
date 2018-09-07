@@ -67,7 +67,7 @@
                 @endif
             @endif
 
-            <form class="form-horizontal alignL span12" method="POST" action="{{ url('/produto') }}">
+            <form class="form-horizontal alignL span12" method="POST" action="{{ url('/produto') }}" enctype="multipart/form-data">
                 @csrf
 
                 <input type="hidden" id="id" name="id" value="<?php echo isset($dadosRegistro->id)?$dadosRegistro->id:'' ?>">
@@ -136,9 +136,12 @@
                 <!-- IMAGEM DO PRODUTO -->
                 <div class="control-group  span5">
                     <label class="label label-success alignL" for="img" > Imagem </label><br/>
-
                     <input type='file' id="imgProfile" name="imgProfile"/>
-                    <img id="foto" src="#" alt="Foto Imagem" />
+                </div>
+
+                <!-- IMAGEM DO PRODUTO -->
+                <div class="control-group  span5">
+                    <img id="foto" src="<?php echo isset($dadosRegistro->url_imagem)?asset($dadosRegistro->url_imagem):'#'?>" alt="Pré Visualização da Foto" />
                 </div>
 
 

@@ -17,7 +17,7 @@ class Controller extends BaseController{
     public $_storagePath;
 
     public function __construct(){
-        $this->_storagePath = 'storage';
+        $this->_storagePath = 'img-up/';
     }//construct
 
     //Monta menu lateral

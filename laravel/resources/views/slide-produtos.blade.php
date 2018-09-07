@@ -137,7 +137,7 @@
                             </li>
                         </ul>
                     </div>
-                    
+
                     <div class="item">
                         <ul class="thumbnails">
                             <li class="span3">

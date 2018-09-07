@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Categoria;
 use App\Models\Caracteristica;
 use App\Models\Produto;
+use Illuminate\Support\Facades\Storage;
 
 class ProdutoController extends Controller{
     private $_dadosPessoais;
@@ -32,7 +33,7 @@ class ProdutoController extends Controller{
         return view('produto.index',['dadosPessoais'=>$this->_dadosPessoais]);
     }//index action
 
-    //TELA - Novo registro
+    //TELA - Novo / Editar registro
     public function tela(Request $request){
         $this->_init();
         $modelRegistro = new Produto();
@@ -54,6 +55,16 @@ class ProdutoController extends Controller{
                 //$aCateg []=  $dados->id_categ.'_'.$dadosCateg->nome;
                 $aCateg []=$dados->id_categ;
             }//foreach categ
+
+            //Verificando a imagem
+            if($dadosRegistro->url_imagem!=''){
+                $dadosRegistro->url_imagem = $this->_storagePath.$dadosRegistro->url_imagem;//->get($this->_storagePath.$dadosRegistro->url_imagem);
+
+                //Storage::setVisibility($this->_storagePath.$dadosRegistro->url_imagem, 'public');
+                //$dadosRegistro->url_imagem = Storage::getVisibility($this->_storagePath.$dadosRegistro->url_imagem);
+
+            }//if iiamge url
+
         }else{
             $dadosRegistro = [];
             $aCarac = [];
@@ -87,10 +98,6 @@ class ProdutoController extends Controller{
             'foto' =>$request->imgProfile,
         ];//aCadastro
 
-        echo '<pre/>';
-        var_dump($aCadastro['foto']);
-        exit;
-
         $flag = '';
         if($request->id!=null){
             $aCadastro['id'] = $request->id;
@@ -123,8 +130,30 @@ class ProdutoController extends Controller{
                 $erro = 1;
                 $msg  = 'Erro ao adicionar dados do produto [Caracteristica ou Categorias]';
             }else{
-                $erro = 0;
-                $msg  = 'Registro '.($flag=='edit'?'editado':'cadastrado').' com sucesso!';
+                //Add a imagem do produto caso possua
+                if($request->hasFile('imgProfile') && $request->file('imgProfile')->isValid()){
+                    //Imagem válida faz o upload
+                    $ext = $request->imgProfile->extension();//Extensão arquivo
+                    $nomeImagem = $idRegistro.'.'.$ext;
+
+                   //Faz o upload utilziabndo o storage do laravel
+                    //$upload = $request->file('imgProfile')->storeAs('public',$nomeImagem);
+                    $upload = $request->file('imgProfile')->move(public_path('img-up'),$nomeImagem);
+
+                    if(!$upload){
+                        $erro = 1;
+                        $msg  = 'Erro ao fazer upload da Imagem.';
+                    }else{
+                        //Atualiza o nome da Imagem no perfil do produto
+                        $dadosRegistroImg = $modelRegistro->where(['id'=>$idRegistro])->first();
+                        $dadosRegistroImg->url_imagem = $nomeImagem;
+                        $dadosRegistroImg->save();
+                    }//if upload
+                }//if imagem
+
+                if($erro==0){
+                    $msg  = 'Registro '.($flag=='edit'?'editado':'cadastrado').' com sucesso!';
+                }
             }//if / else finaliza CRUD
         }else{
             $erro = 1;
@@ -137,9 +166,6 @@ class ProdutoController extends Controller{
         Session::flash('msg',$msg);
         return redirect($url)->with('error',$erro);
     }//Cadastrar action
-
-
-
 
     /************************************
      ** Funçoes Relacionadas ao AJAX ****
@@ -200,6 +226,13 @@ class ProdutoController extends Controller{
 
         //Verificar as relaçoes do registro e deletar
         //Verifica os relaciomentos deste registro
+        //Exclui imagem do item caso possua
+        if($dadosRegistroAtual->url_imagem!='' && file_exists(public_path($this->_storagePath.$dadosRegistroAtual->url_imagem)))
+            unlink(public_path($this->_storagePath.$dadosRegistroAtual->url_imagem));
+        //Exclui as caracteriscas vinculadas
+        $modelRegistro->vinculoProdCaracDelete($request->id);
+        $modelRegistro->vinculoProdCategDelete($request->id);
+
 
         //Deleta o Item atual
         $dadosRegistroAtual->delete();
