@@ -205,7 +205,7 @@ class CarrinhoController extends Controller{
                 $return['id'] = $dadosLista->id;
                 $return['valorLista'] = $this->__convertPrecoTOUser($valorRemover);
                 $return['valorTotal'] = $this->__convertPrecoTOUser(($dadosCarrinho->total-$valorRemover));
-                $return['itensCarrinho'] = $contaTotal;
+                $return['itensCarrinho'] = ($contaTotal-$qde);
 
                 $dadosLista->delete();
             }//if cancela/exlcui item lista
