@@ -217,7 +217,7 @@ CREATE TABLE `users`  (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 1, 1, 'Jose Carlos Fernandes', 'joselgn@gmail.com', '$2y$10$sElcW12jQKlwqG8xa5pD5Ojj7mZCyHT8dz28BuWe7iVXYuCCyXSZ2', '0tN8V!%.Qo$h-xEElQeO$VD', NULL, NULL, 'mgBrpvg96AZZEWevd8FAe51dHa2VM7yYASUI1mXKDcrgyJqFwxDbfukRtk2D', '2018-09-01 23:38:54', '2018-09-01 23:38:54');
+INSERT INTO `users` VALUES (1, 1, 1, 'Administrador para Teste', 'admin@teste.com', '$2y$10$sElcW12jQKlwqG8xa5pD5Ojj7mZCyHT8dz28BuWe7iVXYuCCyXSZ2', '0tN8V!%.Qo$h-xEElQeO$VD', NULL, NULL, 'mgBrpvg96AZZEWevd8FAe51dHa2VM7yYASUI1mXKDcrgyJqFwxDbfukRtk2D', '2018-09-01 23:38:54', '2018-09-01 23:38:54');
 INSERT INTO `users` VALUES (2, 1, 2, 'Teste Usuario', 'teste@teste.com', '$2y$10$YZJZDhU9fa2QCpLaBF7XFeozbclWPH0lvi60B5zihFIq31qRqf/Xu', '@lkM-vMDwKC-wfipNW', NULL, NULL, '137jJXDQLJbw08Vnx5ODi53Og0DwKOM1mZrG8NNsnB90PLiuoSAPPMuJuS6d', '2018-09-02 00:55:55', '2018-09-02 00:55:55');
 INSERT INTO `users` VALUES (3, 1, 2, 'Joao Usuario Teste', 'joao@teste.com', '$2y$10$qF71gSvV05JZS.tc76oKPu9xdzzpWEq66i8iMgZQHHc9.84VQrhFO', '4Qbvrxstc&Dh/uSPnuCaD1PDk&l?r5#fqaHDF6+bJA1Te@dTun0&1J/i?8kp2e', 'SHIN Teste endereco do joao', 71515413, NULL, '2018-09-04 02:21:21', '2018-09-04 02:31:33');
 INSERT INTO `users` VALUES (5, 1, 2, 'carlos H morcelli', 'carlos@teste.com', '$2y$10$lciYr5fXN/7A08ixfblAVOcIhc.ugdCkw16SVhmwVdWhp.923Gs.e', 'sjTX10PS.edxs3N7$41se/zJG!gnrb!lEI#F%lBB1R$CZSnbb%b1Hu?msL*%BnJfV/doh!Ri+', 'Moro em Taguatinga nas Qna 18 não atualmente', 71000000, 'VJklrsettrOhpdDT3mTp0LQy9XWqwzRDnHopO1gjWOKE0RHbsi9diJPN2dGc', '2018-09-04 02:32:33', '2018-09-04 02:32:33');
