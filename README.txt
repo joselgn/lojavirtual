@@ -26,8 +26,9 @@ INTRODUÇÃO:
 14 - Reiniciar o apache: service apache2 restart
 15 - Subir o container novamente: docker start teste-mobly
 16 - Entrar na pasta da aplicação e gerar a key do Laravel: php artisan key:generate
-17 - nesse momento a aplicação deverá estar funcionando e para acessar basta ir no browser e acessar pelo seguinte endereço: http://localhost:80/public/index.php
-18 - Perfis de acesso da aplicação: Aministrador - usuario: admin@teste.com  senha: 123456   Usuário - Usuario: teste@teste.com senha: 123456
+17 - Ainda na pasta da aplicação renomear o arquivo ".env.example" para ".env" e configurar com os dados adquiridos nos passos anteriores a conexão com o banco de dados.
+18 - nesse momento a aplicação deverá estar funcionando e para acessar basta ir no browser e acessar pelo seguinte endereço: http://localhost:80/public/index.php
+19 - Perfis de acesso da aplicação: Aministrador - usuario: admin@teste.com  senha: 123456   Usuário - Usuario: teste@teste.com senha: 123456
 
 Agora só testar a aplicação.
 
