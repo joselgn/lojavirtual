@@ -14,9 +14,9 @@
                                     echo '<ul class="thumbnails">';
 
                                 echo '<li class="span3" style="height: 210px;"><div class="thumbnail">';
-                                echo '<a href="/ver-produto/'.$prod['id'].'" style="height: 120px;"><img src="'.asset($prod['img']).'" alt="" width="70px"></a>';
+                                echo '<a href="'.url("/ver-produto/".$prod['id']).'" style="height: 120px;"><img src="'.asset($prod['img']).'" alt="" width="70px"></a>';
                                 echo '<div class="caption"><h5>'.$prod['nome'].'</h5>';
-                                echo '<h4 style="text-align: center;"><a class="btn" href="/ver-produto/'.$prod['id'].'">+ Detalhes</a><br/><span  style="text-align: center;color: #00BCE1;">'.$prod['preco'].'</span></h4></div>';
+                                echo '<h4 style="text-align: center;"><a class="btn" href="'.url("/ver-produto/".$prod['id']).'">+ Detalhes</a><br/><span  style="text-align: center;color: #00BCE1;">'.$prod['preco'].'</span></h4></div>';
                                 echo '</div></li>';
 
                                 $cont++;

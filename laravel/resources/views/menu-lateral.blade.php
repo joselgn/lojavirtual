@@ -3,9 +3,19 @@
     <!-- BOTAO ACESSO AO CARRINHO DE COMPRAS -->
     @if (Route::has('login'))
         @auth
-            <div class="well well-small"><a id="myCart" href="product_summary.html">
-                    <img src="{{ asset('libraries/bootstrap-shop/themes/images/ico-cart.png') }}" alt="cart">3 Items in your cart
-                    <span class="badge badge-warning pull-right">$155.00</span></a>
+            <?php
+                if(isset($layout['linkCarrinho'])){
+                    $dadosLink = $layout['linkCarrinho'];
+                    $idCarrinho = '/'.$dadosLink['id'];
+                    $totalParcial = $dadosLink['totalParcial'];
+                }else{
+                    $idCarrinho='';
+                    $totalParcial = '0,00';
+                }
+            ?>
+            <div class="well well-small"><a id="myCart" href="{{ url('/carrinho'.$idCarrinho) }}">
+                    <img src="{{ asset('libraries/bootstrap-shop/themes/images/ico-cart.png') }}" alt="cart"> Meu Carrinho <br/>
+                    <span class="badge badge-warning pull-right">Total Parcial: R$ {{ $totalParcial }}</span></a>
             </div>
         @endauth
     @endif

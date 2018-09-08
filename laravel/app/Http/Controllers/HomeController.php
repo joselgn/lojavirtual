@@ -31,6 +31,7 @@ class HomeController extends Controller
         return view('home',[
             'perfil' => $authInstance->perfil,
             'dadosPessoais' => ['nome'=>$authInstance->nome,'email'=>$authInstance->email,'endereco'=>$authInstance->email],
+            'layout'=>$this->_initLayout(),
         ]);
     }//index
 }//class

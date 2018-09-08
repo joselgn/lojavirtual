@@ -240,4 +240,35 @@ class ProdutoController extends Controller{
         echo json_encode(['erro'=>0,'msg'=>'Registro deletado e itens desvinculados com sucesso.']);
         exit;
     }//Ajax Delete
+
+    //Visualiza os detalhes de um produto
+    public function verRegistro(Request $request){
+        $modelRegistro = new Produto();
+        $dadosRegistroAtual = $modelRegistro->find($request->id);
+        $retorno = [];
+
+        //Ajuste url da imagem
+        if($dadosRegistroAtual!=null && $dadosRegistroAtual->url_imagem!=''){
+            $dadosRegistroAtual->url_imagem = $this->_storagePath.$dadosRegistroAtual->url_imagem;
+        }//if dados imagem
+
+        //Ajuste do preco
+        $dadosRegistroAtual->preco = $this->__convertPrecoTOUser($dadosRegistroAtual->preco);
+
+
+        $retorno['dadosPessoais'] = $this->_dadosPessoais;
+        $retorno['dadosRegistro'] = $dadosRegistroAtual;
+        $retorno['layout'] = $this->_initLayout();
+
+        //Verifica se possui erro
+        if(isset($request->error)){
+            $erro =  $request->error;
+            $retorno['error'] =$request->error;
+        }//if set error
+
+        return view('produto.detalhe-registro',$retorno);//return to view
+    }//ver registro
+
+
+
 }//Class

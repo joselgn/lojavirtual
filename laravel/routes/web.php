@@ -14,7 +14,13 @@
 //GET Routes
 Route::get('/', 'IndexController@index');
 Route::get('/registro', 'IndexController@novoRegistro');
+
+//logout do Sistema
 Route::get('/logout', 'Auth\LoginController@logout');
+
+//Visualiza detalhes do produto
+Route::get('/ver-produto/{id}/{error?}', 'ProdutoController@verRegistro');
+
 
 //AUTH Rotes
 Auth::routes();
@@ -54,13 +60,20 @@ Route::middleware('auth')->group(function () {
 
 
     //PRODUTOS
-    Route::get('/lista-produtos', 'ProdutoController@index');
+    Route::get('/lista-produtos','ProdutoController@index');
     Route::get('/produto/{id?}', 'ProdutoController@tela');
     Route::post('/produto/{id?}','ProdutoController@salvar');
     //Grid
     Route::post('/ajax-produto-grid','ProdutoController@ajaxGrid');
     //Delete
     Route::delete('/ajax-produto-delete/{id?}','ProdutoController@delete');
+
+
+    //CARRINHO DE COMPRAS
+    Route::get('/carrinho/{id?}', 'CarrinhoController@index');
+    Route::get('/comprar/{id}', 'CarrinhoController@comprar');
+    //Ajax
+    Route::post('/ajax-carrinho-item','CarrinhoController@ajaxItem');
 
 });//auth routes
 

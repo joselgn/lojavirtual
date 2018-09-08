@@ -38,7 +38,7 @@
                     if(count($listaProds)>0){
                         echo '<div class="tab-pane" id="listView">';
                         foreach($listaProds as $prod){
-                            echo '<div class="row"><div class="span2"><img src="'.asset($prod['img']).'" alt=""/></div>';
+                            echo '<div class="row"><div class="span2"><img src="'.asset($prod['img']).'" width="210px" alt=""/></div>';
                             echo '<div class="span4"><h3>'.$prod['nome'].'</h3>';
                             echo '<p><a href="'.url("/ver-produto/".$prod['id']).'" class="btn btn-small pull-right"> + Detalhes</a><br/>';
                             echo $prod['desc'].'</p><br class="clr"/></div>';
@@ -51,7 +51,7 @@
                         echo '<div class="tab-pane  active" id="blockView"><!-- Produtos em Bloco --><ul class="thumbnails">';
                         foreach($listaProds as $prod){
                             echo '<li class="span3"><div class="thumbnail">';
-                            echo '<a href="'.url("/ver-produto/".$prod['id']).'"><img src="'.asset($prod['img']).'" alt=""/></a>';
+                            echo '<a href="'.url("/ver-produto/".$prod['id']).'"><img src="'.asset($prod['img']).'" width="210px" alt=""/></a>';
                             echo '<div class="caption"><h5>'.$prod['nome'].'</h5><p><a class="btn btn-primary" href="#">'.$prod['preco'].'</a></p>';
                             echo '<h4 style="text-align:center"><a class="btn" href="'.url("/ver-produto/".$prod['id']).'"> <i class="icon-zoom-in"></i></a>';
                             echo '<a class="btn" href="'.url("/comprar/".$prod['id']).'">Comprar <i class="icon-shopping-cart"></i></a></h4>';
@@ -66,86 +66,5 @@
                     echo '<div class="row">Nenhum Produto para ser exibido</div>';
                 }//if isset prods
         ?>
-
-
-        <!-- Produtos em Bloco
-
-        <div class="tab-pane  active" id="blockView">
-            <ul class="thumbnails">
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
-                        <div class="caption">
-                            <h5>Manicure &amp; Pedicure</h5>
-                            <p>
-                                TESTE TESTE TESTE
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
-                        <div class="caption">
-                            <h5>Manicure &amp; Pedicure</h5>
-                            <p>
-                                I'm a paragraph. Click here
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
-                        <div class="caption">
-                            <h5>Manicure &amp; Pedicure</h5>
-                            <p>
-                                I'm a paragraph. Click here
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
-                        <div class="caption">
-                            <h5>Manicure &amp; Pedicure</h5>
-                            <p>
-                                I'm a paragraph. Click here
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
-                        <div class="caption">
-                            <h5>Manicure &amp; Pedicure</h5>
-                            <p>
-                                I'm a paragraph. Click here
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-                        </div>
-                    </div>
-                </li>
-                <li class="span3">
-                    <div class="thumbnail">
-                        <a href="product_details.html"><img src="themes/images/products/3.jpg" alt=""/></a>
-                        <div class="caption">
-                            <h5>Manicure &amp; Pedicure</h5>
-                            <p>
-                                I'm a paragraph. Click here
-                            </p>
-                            <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">&euro;222.00</a></h4>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-            <hr class="soft"/>
-        </div>-->
 
 @endsection
