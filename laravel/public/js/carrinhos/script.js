@@ -38,6 +38,13 @@ var scriptJS = {
                             $('#linha_'+data.id).remove();
                         break
                     }//switch acao
+
+
+                    if(data.valorTotal=='0,00')
+                        window.location.href =top.baseURL+'/carrinho';
+                    else
+                        console.log('Vl Total: '+data.valorTotal);
+
                 }//if erro
 
             }//success ajax

@@ -255,7 +255,6 @@ class ProdutoController extends Controller{
         //Ajuste do preco
         $dadosRegistroAtual->preco = $this->__convertPrecoTOUser($dadosRegistroAtual->preco);
 
-
         $retorno['dadosPessoais'] = $this->_dadosPessoais;
         $retorno['dadosRegistro'] = $dadosRegistroAtual;
         $retorno['layout'] = $this->_initLayout();

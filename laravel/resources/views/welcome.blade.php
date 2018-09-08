@@ -60,7 +60,8 @@
                             @if (Route::has('login'))
                                 @auth
                                     <li><span style="color: #fc4500">{{ $dadosPessoais['nome'] }}</span></li>
-                                    <li><a href="{{ url('/home') }}">Meu Carrinho</a></li>
+                                    <li><a href="{{ url('/home') }}">Início</a></li>
+                                    <li><a href="{{ url('/carrinho') }}">Meu Carrinho</a></li>
                                     <li><a href="{{ url('/logout') }}">Sair</a></li>
                                 @else
                                     <li><a href="{{ route('login') }}">Entrar</a></li>

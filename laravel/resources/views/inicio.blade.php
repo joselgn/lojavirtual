@@ -38,10 +38,10 @@
                     if(count($listaProds)>0){
                         echo '<div class="tab-pane" id="listView">';
                         foreach($listaProds as $prod){
-                            echo '<div class="row"><div class="span2"><img src="'.asset($prod['img']).'" width="210px" alt=""/></div>';
+                            echo '<div class="row"><div class="span2"><img src="'.asset($prod['img']).'" style="width: 210px;" alt=""/></div>';
                             echo '<div class="span4"><h3>'.$prod['nome'].'</h3>';
                             echo '<p><a href="'.url("/ver-produto/".$prod['id']).'" class="btn btn-small pull-right"> + Detalhes</a><br/>';
-                            echo $prod['desc'].'</p><br class="clr"/></div>';
+                            echo 'Características: '.$prod['caracteristicas'].'</p><br class="clr"/></div>';
                             echo '<div class="span3 alignR"><h3>'.$prod['preco'].'</h3>';
                             echo '<a href="'.url("/comprar/".$prod['id']).'" class="btn btn-large btn-primary"> Comprar <i class=" icon-shopping-cart"></i></a><br/>';
                             echo '</div></div><hr class="soft"/>';
@@ -51,7 +51,7 @@
                         echo '<div class="tab-pane  active" id="blockView"><!-- Produtos em Bloco --><ul class="thumbnails">';
                         foreach($listaProds as $prod){
                             echo '<li class="span3"><div class="thumbnail">';
-                            echo '<a href="'.url("/ver-produto/".$prod['id']).'"><img src="'.asset($prod['img']).'" width="210px" alt=""/></a>';
+                            echo '<a href="'.url("/ver-produto/".$prod['id']).'"><img src="'.asset($prod['img']).'" style="height: 210px;" alt=""/></a>';
                             echo '<div class="caption"><h5>'.$prod['nome'].'</h5><p><a class="btn btn-primary" href="#">'.$prod['preco'].'</a></p>';
                             echo '<h4 style="text-align:center"><a class="btn" href="'.url("/ver-produto/".$prod['id']).'"> <i class="icon-zoom-in"></i></a>';
                             echo '<a class="btn" href="'.url("/comprar/".$prod['id']).'">Comprar <i class="icon-shopping-cart"></i></a></h4>';

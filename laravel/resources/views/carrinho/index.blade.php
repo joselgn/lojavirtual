@@ -71,7 +71,7 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>Imagem</th>
+                <th>&nbsp;</th>
                 <th>Produto</th>
                 <th>Quantidade</th>
                 <th>Preço R$</th>

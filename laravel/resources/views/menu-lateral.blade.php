@@ -22,27 +22,30 @@
 
     <!-- CATEGORIAS -->
     <ul id="sideManu" class="nav nav-tabs nav-stacked">
+        <li style="cursor: pointer;"><a  href="{{ url('/') }}">Todos os Produtos<i class="icon-link"></i></a></li>
+
         <?php
             $menu = $layout['menu'];
             if(count($menu)>0){
                 foreach($menu as $item){
                     if(count($item['submenu'])>0){
-                        echo '<li class="subMenu open" style="cursor: pointer;"><a>'.$item["nome"].'<i class="icon-chevron-down"></i></a>';
+                        echo '<li class="subMenu" style="cursor: pointer;"><a>'.$item["nome"].'<i class="icon-chevron-down"></i></a>';
                             //Percorre submenus
                             echo '<ul style="display:none">';
                             foreach ($item["submenu"] as $submenu){
-                                    echo '<li><a href="/submenu/'.$submenu['id'].'"><i class="icon-chevron-right"></i>'.$submenu["nome"].'<i class="icon-link"></i></a></li>';
+                                    echo '<li><a href="'.url('/submenu/'.$submenu['id']).'"><i class="icon-chevron-right"></i>'.$submenu["nome"].'<i class="icon-link"></i></a></li>';
                             }//foreach submenu
                             echo '</ul>';
                         echo '</li>';//fecha menu
                     }else{
-                        echo '<li><a href="/menu/'.$item['id'].'">'.$item["nome"].'<i class="icon-link"></i></a></li>';
+                        echo '<li><a href="'.url('/menu/'.$item['id']).'">'.$item["nome"].'<i class="icon-link"></i></a></li>';
                     }//if / else submenu
                 }//foreach
             }else{
-                echo '<li><a href="/">Sem categorias cadastradas <i class="icon-link"></i></li>';
+                echo '<li><a href="'.url('/').'">Sem categorias cadastradas <i class="icon-link"></i></li>';
             }//if / else categorias
         ?>
+    </ul>
     <!-- CATEGORIAS END -->
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Caracteristica;
 use App\Models\Carrinho;
 use App\Models\ListaCarrinho;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -83,7 +84,6 @@ class Controller extends BaseController{
                 'img'=>'img-up/'.$prod->url_imagem,
             ];
         }//foreach array prods
-
         return $arrayProds;
     }//ultimos produtos
 
@@ -92,15 +92,29 @@ class Controller extends BaseController{
     public function _listaProdutos(){
         $modelProdutos = new Produto();
         $listaProds = $modelProdutos->where(['ativo'=>1])->get();
+        $modelCaracteristicas = new Caracteristica();
 
         $arrayProds=[];
         foreach ($listaProds as $prod){
+            //Verifica as características vinculadas ao produto
+            $dadosVincCarac = $modelProdutos->vinculoProdCaracPsq('id_prod',$prod->id);
+            $caracteristicas='';
+            if($dadosVincCarac!=null){
+                foreach($dadosVincCarac as $carac){
+                    $dadosCaracteristicas = $modelCaracteristicas->where(['id'=>$carac->id_carac])->first();
+
+                    if($dadosCaracteristicas!=null)
+                        $caracteristicas .= $dadosCaracteristicas->nome.' / ';
+                }//foreach lista caracteristicas
+            }//if caracteristicas
+
             $arrayProds[] =[
                 'id'=> $prod->id,
                 'nome'=> $prod->nome,
                 'preco'=> 'R$ '.number_format($prod->preco,2,',','.'),
                 'img'=>'img-up/'.$prod->url_imagem,
                 'desc'=>$prod->descricao,
+                'caracteristicas' => $caracteristicas
             ];
         }//foreach array prods
 

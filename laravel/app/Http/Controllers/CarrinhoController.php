@@ -200,14 +200,22 @@ class CarrinhoController extends Controller{
                     }//foreach
                 }//if
 
+                //Valor para remover do carrinho
+                $vlrRemove = ($dadosCarrinho->total-$valorRemover);
+
+
                 $return['acao'] = 'c';
                 $return['qde'] = $qde;
                 $return['id'] = $dadosLista->id;
                 $return['valorLista'] = $this->__convertPrecoTOUser($valorRemover);
-                $return['valorTotal'] = $this->__convertPrecoTOUser(($dadosCarrinho->total-$valorRemover));
+                $return['valorTotal'] = $this->__convertPrecoTOUser($vlrRemove);
                 $return['itensCarrinho'] = ($contaTotal-$qde);
 
                 $dadosLista->delete();
+
+                //upload do carrinho
+                $dadosCarrinho->total = ($vlrRemove);
+                $dadosCarrinho->save();
             }//if cancela/exlcui item lista
         }//if dados lista
 
