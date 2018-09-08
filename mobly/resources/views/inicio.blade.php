@@ -51,7 +51,7 @@
                         echo '<div class="tab-pane  active" id="blockView"><!-- Produtos em Bloco --><ul class="thumbnails">';
                         foreach($listaProds as $prod){
                             echo '<li class="span3"><div class="thumbnail">';
-                            echo '<a href="'.url("/ver-produto/".$prod['id']).'"><img src="'.asset($prod['img']).'" style="height: 210px;" alt=""/></a>';
+                            echo '<a href="'.url("/ver-produto/".$prod['id']).'"><img src="'.asset($prod['img']).'" style="height: 200px;" alt=""/></a>';
                             echo '<div class="caption"><h5>'.$prod['nome'].'</h5><p><a class="btn btn-primary" href="#">'.$prod['preco'].'</a></p>';
                             echo '<h4 style="text-align:center"><a class="btn" href="'.url("/ver-produto/".$prod['id']).'"> <i class="icon-zoom-in"></i></a>';
                             echo '<a class="btn" href="'.url("/comprar/".$prod['id']).'">Comprar <i class="icon-shopping-cart"></i></a></h4>';

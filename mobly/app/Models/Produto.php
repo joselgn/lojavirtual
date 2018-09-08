@@ -29,7 +29,7 @@ class Produto extends Model{
         $modelRegistro->nome   = isset($array['nome'])?$array['nome']:'';
         $modelRegistro->ativo  = isset($array['ativo'])?$array['ativo']:1;
         $modelRegistro->preco  = isset($array['preco'])?$array['preco']:0.00;
-        $modelRegistro->url_imagem  = isset($array['url_imagem'])?$array['url_imagem']:null;
+        $modelRegistro->url_imagem  = isset($array['url_imagem'])?$array['url_imagem']:($modelRegistro->url_imagem!=''?$modelRegistro->url_imagem:null);
         $modelRegistro->descricao  = isset($array['descricao'])?$array['descricao']:null;
 
         if($modelRegistro->save())

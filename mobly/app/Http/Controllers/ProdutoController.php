@@ -95,7 +95,7 @@ class ProdutoController extends Controller{
             //itens para Vincular
             'caracteristicas' => $request->caracteristicas!=''?explode(',',$request->caracteristicas):null,
             'categorias' => $request->categorias!=''?explode(',',$request->categorias):null,
-            'foto' =>$request->imgProfile,
+            'foto' => $request->imgProfile,
         ];//aCadastro
 
         $flag = '';
