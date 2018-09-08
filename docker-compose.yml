@@ -7,7 +7,7 @@ db:
   environment:
     MYSQL_ROOT_PASSWORD: root  
   volumes:
-     - ./mariadb:/home/dados
+     - ./mariadb/bd:/home/dados
 
 #Aplicação
 teste-mobly:
