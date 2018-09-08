@@ -1,0 +1,21 @@
+#Banco de Dados
+db:
+  image: mariadb
+  container_name: mariaDB
+  ports:
+      - "8080:8080"
+  environment:
+    MYSQL_ROOT_PASSWORD: root  
+  volumes:
+     - ./mariadb:/home/dados
+
+#Aplicação
+teste-mobly:
+  image: php:7-apache
+  container_name: teste-mobly
+  ports:
+    - "80:80"
+  volumes:
+    - ./mobly:/var/www/html
+  links:
+     - db:db

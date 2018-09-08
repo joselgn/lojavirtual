@@ -26,11 +26,13 @@ class Controller extends BaseController{
     }//construct
 
     //Inicia o carregamento padrao de layout
-    public function _initLayout(){
+    public function _initLayout($array=null){
+        $filtroProdutos = isset($array['filtroProdutos'])?$array['filtroProdutos']:null;
+
         return [
             'menu' => $this->_montaMenuLateral(),
             'lastProds' => $this->_ultimosProdutos(),
-            'allProds' =>$this->_listaProdutos(),
+            'allProds' =>$this->_listaProdutos($filtroProdutos),
             'linkCarrinho' => $this->_linkCarrinho(),
             'carrinhoDetalhes' => $this->_carrinhoDetalhado(),
         ];
@@ -89,7 +91,7 @@ class Controller extends BaseController{
 
 
     //Toda a lista de Produtos ativos
-    public function _listaProdutos(){
+    public function _listaProdutos($array=null){
         $modelProdutos = new Produto();
         $listaProds = $modelProdutos->where(['ativo'=>1])->get();
         $modelCaracteristicas = new Caracteristica();
