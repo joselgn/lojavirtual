@@ -14,6 +14,10 @@
  Date: 08/09/2018 15:16:05
 */
 
+CREATE DATABASE lojavirtualdb;
+USE lojavirtualdb;
+
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
