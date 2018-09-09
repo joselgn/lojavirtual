@@ -11,7 +11,7 @@
  Target Server Version : 100309
  File Encoding         : 65001
 
- Date: 08/09/2018 15:16:05
+ Date: 09/09/2018 14:35:01
 */
 
 CREATE DATABASE lojavirtualdb;
@@ -32,7 +32,7 @@ CREATE TABLE `caracteristicas`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of caracteristicas
@@ -49,6 +49,8 @@ INSERT INTO `caracteristicas` VALUES (9, 1, 'Samsung', '2018-09-04 03:40:45', '2
 INSERT INTO `caracteristicas` VALUES (10, 1, 'LG', '2018-09-04 03:40:52', '2018-09-04 03:40:52');
 INSERT INTO `caracteristicas` VALUES (11, 1, 'HP', '2018-09-04 03:41:19', '2018-09-04 03:41:19');
 INSERT INTO `caracteristicas` VALUES (12, 1, 'Notebook', '2018-09-04 03:44:20', '2018-09-04 03:55:56');
+INSERT INTO `caracteristicas` VALUES (13, 1, 'Dell', '2018-09-09 17:11:59', '2018-09-09 17:11:59');
+INSERT INTO `caracteristicas` VALUES (14, 1, 'Multimídea', '2018-09-09 17:12:18', '2018-09-09 17:12:18');
 
 -- ----------------------------
 -- Table structure for carrinhos
@@ -181,17 +183,18 @@ CREATE TABLE `produtos`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of produtos
 -- ----------------------------
 INSERT INTO `produtos` VALUES (5, 1, 'TV 40', 3599.80, '5.jpeg', 'testando', '2018-09-05 21:56:06', '2018-09-07 05:00:46');
-INSERT INTO `produtos` VALUES (7, 1, 'Mesa para Escritório 2 Gavetas ME4122 Tecno Mobili Carvalho/Fendi', 310.10, '7.jpeg', 'rests', '2018-09-07 01:59:15', '2018-09-08 18:00:04');
+INSERT INTO `produtos` VALUES (7, 1, 'Mesa para Escritório', 310.10, '7.jpeg', 'rests', '2018-09-07 01:59:15', '2018-09-08 20:40:11');
 INSERT INTO `produtos` VALUES (9, 1, 'Pilha A4', 45.00, '9.jpeg', 'rests', '2018-09-07 02:11:49', '2018-09-08 17:58:13');
 INSERT INTO `produtos` VALUES (10, 1, 'Caneta Azul', 10.00, '10.jpeg', 'Somente  Caracteríticas do Produto\r\n\r\n\r\nA caneta que é sinônimo de qualidade conhecida no mundo inteiro!\r\nCorpo hexagonal que assegura o conforto na escrita e transparente para visualização da tinta\r\nTinta de alta qualidade, que seca rapidamente evitando borrões na escrita.\r\nDurabilidade: Escreve até 2 Km\r\nEscrita macia\r\n\r\n\r\nA BIC e o Meio Ambiente\r\nProduto fabricado com a quantidade certa de matéria-prima para uso prolongado e seguro\r\nNão contém PVC.\r\n\r\n\r\nEspecificações\r\nPonta média de 1 mm, largura da linha 0,4mm\r\nTampa e plug da mesma cor da tinta.\r\nTampa ventilada em conformidade com padrão ISO\r\nBola de Tungstênio, esfera perfeita e muito resistente.\r\n\r\n\r\nEmbalagem\r\nContém 50 unidades na cor azul', '2018-09-08 06:40:06', '2018-09-08 06:40:06');
 INSERT INTO `produtos` VALUES (11, 1, 'Sofá Cama - Arizon', 1280.00, '11.jpeg', 'Cor 	Cinza\r\nGarantia 	3 Meses\r\nConteúdo da Embalagem 	1 Sofá-Cama\r\nModelo 	Premium\r\nMaterial 	Estrutura em madeira de reflorestamento (eucalipto e pinus) seca e tratada, chapas de OSB com sistemas flexíveis compostos por percintas elásticas, assento espuma D33, encosto espuma D26, manta de poliéster siliconizada e revestimento em tecido suede.\r\nDescrição do Tamanho 	Aberto: Altura 88 cm Largura 190 cm Profundidade 96 cm/ Fechado: Altura 46 cm Largura 190 cm Profundidade 120 cm\r\nNecessita Montagem? 	Não\r\nEstrutura do Assento 	Espuma\r\nPeso suportado pelo produto (kg) 	120.00', '2018-09-08 06:42:05', '2018-09-08 06:42:05');
 INSERT INTO `produtos` VALUES (12, 1, 'Mouse Gamer', 188.12, '12.jpeg', 'Características:\r\n\r\n- Marca: Razer\r\n\r\n- Modelo: RZ01-00940100-R3M1 \r\n\r\n \r\n\r\nEspecificações:\r\n\r\n- Sensor Óptico: 6400 dpi 4G\r\n\r\n- Cor: Preto\r\n\r\n- Iluminação Laranja\r\n\r\n- Scroll vertical\r\n\r\n- Interface USB 2.0\r\n\r\n- 3 Botões Personalizáveis tipo Hyperresponse\r\n\r\n- Pezinhos de teflon (PTFE)\r\n\r\n- Compatível com Windows e Mac\r\n\r\n- Extremamente rápido: até 200\"/s e 50g\r\n\r\n- Ultrapolling de 1.000Hz e tempo de resposta de 1ms\r\n\r\n \r\n\r\nConteúdo da Embalagem:\r\n\r\n- 01 Mouse Gamer Krait\r\n\r\n\r\n\r\nGarantia\r\n12 meses de garantia\r\n\r\nPeso\r\n320 gramas (bruto com embalagem)', '2018-09-08 16:29:05', '2018-09-08 16:29:05');
+INSERT INTO `produtos` VALUES (13, 1, 'Teclado Gamer', 70.00, '13.jpeg', 'Teclado com fio para uso diário no escritório e em casa\r\n\r\nO teclado com fio da Dell fornece uma solução de teclado conveniente para uso diário no escritório e em casa. O layout completo do teclado com teclas tipo chiclete permite digitação confortável e eficiente, o que é excelente para uso diário em praticamente qualquer tarefa que você esteja fazendo.\r\n\r\nTeclas multimídia para ações e comandos rápidos\r\n\r\nAs teclas multimídia convenientes permitem que você acesse funções com facilidade, como reproduzir, pausar, voltar e avançar além de controlar o volume.\r\n\r\nDesign confortável e centralizado\r\n\r\nCom um design compacto, porém de tamanho normal e ainda com um teclado numérico, o teclado com fio da Dell é ideal para ambientes domésticos e uso em escritórios. Com uma estrutura durável e teclas silenciosas, foi projetado com o objetivo de fornecer conforto para as demandas diárias do uso de desktops. O teclado com fio da Dell também tem um apoio para as mãos que pode ser comprado separadamente.', '2018-09-09 17:11:34', '2018-09-09 17:19:16');
 
 -- ----------------------------
 -- Table structure for users
@@ -217,8 +220,8 @@ CREATE TABLE `users`  (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 1, 1, 'Administrador para Teste', 'admin@teste.com', '$2y$10$sElcW12jQKlwqG8xa5pD5Ojj7mZCyHT8dz28BuWe7iVXYuCCyXSZ2', '0tN8V!%.Qo$h-xEElQeO$VD', NULL, NULL, 'mgBrpvg96AZZEWevd8FAe51dHa2VM7yYASUI1mXKDcrgyJqFwxDbfukRtk2D', '2018-09-01 23:38:54', '2018-09-01 23:38:54');
-INSERT INTO `users` VALUES (2, 1, 2, 'Teste Usuario', 'teste@teste.com', '$2y$10$YZJZDhU9fa2QCpLaBF7XFeozbclWPH0lvi60B5zihFIq31qRqf/Xu', '@lkM-vMDwKC-wfipNW', NULL, NULL, '137jJXDQLJbw08Vnx5ODi53Og0DwKOM1mZrG8NNsnB90PLiuoSAPPMuJuS6d', '2018-09-02 00:55:55', '2018-09-02 00:55:55');
+INSERT INTO `users` VALUES (1, 1, 1, 'Administrador para Teste', 'admin@teste.com', '$2y$10$sElcW12jQKlwqG8xa5pD5Ojj7mZCyHT8dz28BuWe7iVXYuCCyXSZ2', '0tN8V!%.Qo$h-xEElQeO$VD', NULL, NULL, 'Qd0SfnvsI2B3k33oKS3f8Qsow2C9MNJdqSwUa8DsxVy2GQyoWhHz6r86eEAI', '2018-09-01 23:38:54', '2018-09-01 23:38:54');
+INSERT INTO `users` VALUES (2, 1, 2, 'Teste Usuario', 'teste@teste.com', '$2y$10$YZJZDhU9fa2QCpLaBF7XFeozbclWPH0lvi60B5zihFIq31qRqf/Xu', '@lkM-vMDwKC-wfipNW', NULL, NULL, 'uiGOAVZdcvigWyuD6IScFVV6AwKOStcMg9SvmP0vLaMEiu9dUT7TGHHZVhpP', '2018-09-02 00:55:55', '2018-09-02 00:55:55');
 INSERT INTO `users` VALUES (3, 1, 2, 'Joao Usuario Teste', 'joao@teste.com', '$2y$10$qF71gSvV05JZS.tc76oKPu9xdzzpWEq66i8iMgZQHHc9.84VQrhFO', '4Qbvrxstc&Dh/uSPnuCaD1PDk&l?r5#fqaHDF6+bJA1Te@dTun0&1J/i?8kp2e', 'SHIN Teste endereco do joao', 71515413, NULL, '2018-09-04 02:21:21', '2018-09-04 02:31:33');
 INSERT INTO `users` VALUES (5, 1, 2, 'carlos H morcelli', 'carlos@teste.com', '$2y$10$lciYr5fXN/7A08ixfblAVOcIhc.ugdCkw16SVhmwVdWhp.923Gs.e', 'sjTX10PS.edxs3N7$41se/zJG!gnrb!lEI#F%lBB1R$CZSnbb%b1Hu?msL*%BnJfV/doh!Ri+', 'Moro em Taguatinga nas Qna 18 não atualmente', 71000000, 'VJklrsettrOhpdDT3mTp0LQy9XWqwzRDnHopO1gjWOKE0RHbsi9diJPN2dGc', '2018-09-04 02:32:33', '2018-09-04 02:32:33');
 
@@ -237,27 +240,29 @@ CREATE TABLE `vin_prod_carac`  (
   INDEX `vin_prod_carac_id_carac_foreign`(`id_carac`) USING BTREE,
   CONSTRAINT `vin_prod_carac_id_carac_foreign` FOREIGN KEY (`id_carac`) REFERENCES `caracteristicas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `vin_prod_carac_id_prod_foreign` FOREIGN KEY (`id_prod`) REFERENCES `produtos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 96 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 123 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of vin_prod_carac
 -- ----------------------------
-INSERT INTO `vin_prod_carac` VALUES (80, 5, 8, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (81, 5, 6, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (82, 5, 4, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (83, 5, 3, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (84, 5, 5, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (85, 10, 2, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (86, 11, 8, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (87, 11, 4, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (88, 11, 3, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (89, 12, 11, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (90, 12, 6, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (91, 12, 2, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (92, 9, 10, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (93, 9, 2, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (94, 7, 4, NULL, NULL);
-INSERT INTO `vin_prod_carac` VALUES (95, 7, 3, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (105, 7, 4, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (106, 7, 3, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (107, 9, 10, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (108, 9, 2, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (109, 10, 2, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (110, 11, 8, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (111, 11, 4, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (112, 11, 3, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (113, 12, 11, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (114, 12, 6, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (115, 12, 2, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (116, 13, 13, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (117, 13, 14, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (118, 5, 8, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (119, 5, 6, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (120, 5, 4, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (121, 5, 3, NULL, NULL);
+INSERT INTO `vin_prod_carac` VALUES (122, 5, 5, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for vin_prod_categ
@@ -274,22 +279,20 @@ CREATE TABLE `vin_prod_categ`  (
   INDEX `vin_prod_categ_id_categ_foreign`(`id_categ`) USING BTREE,
   CONSTRAINT `vin_prod_categ_id_categ_foreign` FOREIGN KEY (`id_categ`) REFERENCES `categorias` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `vin_prod_categ_id_prod_foreign` FOREIGN KEY (`id_prod`) REFERENCES `produtos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 77 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of vin_prod_categ
 -- ----------------------------
-INSERT INTO `vin_prod_categ` VALUES (48, 5, 17, NULL, NULL);
-INSERT INTO `vin_prod_categ` VALUES (49, 5, 13, NULL, NULL);
-INSERT INTO `vin_prod_categ` VALUES (50, 5, 14, NULL, NULL);
-INSERT INTO `vin_prod_categ` VALUES (51, 10, 3, NULL, NULL);
-INSERT INTO `vin_prod_categ` VALUES (52, 10, 13, NULL, NULL);
-INSERT INTO `vin_prod_categ` VALUES (53, 10, 14, NULL, NULL);
-INSERT INTO `vin_prod_categ` VALUES (54, 11, 13, NULL, NULL);
-INSERT INTO `vin_prod_categ` VALUES (55, 12, 14, NULL, NULL);
-INSERT INTO `vin_prod_categ` VALUES (56, 12, 8, NULL, NULL);
-INSERT INTO `vin_prod_categ` VALUES (57, 9, 14, NULL, NULL);
-INSERT INTO `vin_prod_categ` VALUES (58, 7, 13, NULL, NULL);
-INSERT INTO `vin_prod_categ` VALUES (59, 7, 14, NULL, NULL);
+INSERT INTO `vin_prod_categ` VALUES (67, 7, 13, NULL, NULL);
+INSERT INTO `vin_prod_categ` VALUES (68, 9, 1, NULL, NULL);
+INSERT INTO `vin_prod_categ` VALUES (69, 10, 13, NULL, NULL);
+INSERT INTO `vin_prod_categ` VALUES (70, 11, 13, NULL, NULL);
+INSERT INTO `vin_prod_categ` VALUES (71, 12, 14, NULL, NULL);
+INSERT INTO `vin_prod_categ` VALUES (72, 12, 8, NULL, NULL);
+INSERT INTO `vin_prod_categ` VALUES (73, 13, 14, NULL, NULL);
+INSERT INTO `vin_prod_categ` VALUES (74, 13, 15, NULL, NULL);
+INSERT INTO `vin_prod_categ` VALUES (75, 5, 1, NULL, NULL);
+INSERT INTO `vin_prod_categ` VALUES (76, 5, 13, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
