@@ -14,6 +14,7 @@
 //GET Routes
 Route::get('/', 'IndexController@index');
 Route::get('/registro', 'IndexController@novoRegistro');
+Route::get('/menu/{menuid}', 'IndexController@filtraCategoria');
 
 //logout do Sistema
 Route::get('/logout', 'Auth\LoginController@logout');
@@ -27,6 +28,7 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     //Home - Index Admin
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home/{menuid}', 'HomeController@filtraCategoria');
 
     //USUARIOS
     Route::get('/lista-usuarios', 'UsuarioController@index');
