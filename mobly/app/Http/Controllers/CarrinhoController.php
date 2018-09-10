@@ -103,6 +103,77 @@ class CarrinhoController extends Controller{
     }//comprar action
 
 
+    //Finalizando compra
+    public function telaFinalizaCompra(Request $request){
+        $this->_init();
+        $modelCarrinho = new Carrinho();
+        $modelUsuario  = new User();
+        $modelListaCarrinho = new ListaCarrinho();
+
+        //Dados de retorno
+        $retorno=[];
+
+        //Dadops do usuario
+        $dadosUsuario = $modelUsuario->where(['id'=>Auth::id()])->first();
+        //dd($dadosUsuario);
+
+        $endereco = $dadosUsuario->endereco!=null&&$dadosUsuario->endereco!=''?($dadosUsuario->cep!=null?'CEP: '.$dadosUsuario->cep.' - ':'').$dadosUsuario->endereco :'';//endereço
+
+        //Verificando os dados do carrinho
+        if(isset($request->id)){
+            $dadosCarrinho = $modelCarrinho->where(['id'=>$request->id])->first();
+        }else{
+            $dadosCarrinho = $modelCarrinho->where(['id_user'=>Auth::id(),'ativo'=>1])->first();
+        }//if id
+
+        //Verifica se o carrinho possui itens para compra
+        $dadosListaCarrinho = $dadosCarrinho!=null?$modelListaCarrinho->where(['id_carrinho'=>$dadosCarrinho->id])->get():null;
+        $qdeItens = 0;
+        if($dadosListaCarrinho!=null){
+            //Vertifica qde de itens
+
+            foreach ($dadosListaCarrinho as $list){
+                $qdeItens += $list->qde;
+            }//foreach
+
+            $retorno['carrinho']= [
+                'id' => $dadosCarrinho!=null?$dadosCarrinho->id:'',
+                'vlTotal' => $this->__convertPrecoTOUser($dadosCarrinho->total),
+                'itensTotal' => $qdeItens,
+                'endereco' => $endereco,
+            ];
+        }//if dados lista carrinho
+
+        if($qdeItens==0||$dadosCarrinho==null)
+            return redirect('/');
+
+        return view('carrinho.finaliza',
+            [
+                'dadosPessoais'=>$this->_dadosPessoais,
+                'layout' => $this->_initLayout(),
+                'dados' => $retorno,
+            ]);
+    }//finaliza compra action
+
+    //tela de pagamento do carrinho
+    public function telaPagamento(Request $request){
+        $modelCarrinho = new Carrinho();
+        $dadosCarrinho = $modelCarrinho->where(['id'=>$request->id])->first();
+
+        if(!isset($request->id)||$dadosCarrinho==null)
+            return redirect('/');
+
+        return view( 'carrinho.pagamento',[
+            'dadosPessoais'=>$this->_dadosPessoais,
+            'layout' => $this->_initLayout(),
+                'dados' =>[
+                    'nuPedido' => $dadosCarrinho->id,
+                    'valorTotal' => $dadosCarrinho->total,
+                ]//dados
+        ]);
+    }//tela pagamento action
+
+
 
     /********************************
      ****** Funções AJAX ************
@@ -225,6 +296,51 @@ class CarrinhoController extends Controller{
         return response()->json($return);
     }//ajax item
 
+    //Atualizar endereco do usuario
+    public function atualizar(Request $request){
+        $erro =0;
+        $modelCarrinho = new Carrinho();
+        $modelUsuario = new User();
 
+        $dadosCarrinho = $modelCarrinho->where(['id'=>$request->id])->first();
+        $dadosUsuario  = $modelUsuario->where(['id'=>Auth::id()])->first();
+
+        if($dadosCarrinho==null||$request->endereco=='')
+            $erro=1;
+
+        if($erro==0){
+            //Atualiza dados do usuario
+            $dadosUsuario->endereco = $request->endereco;
+            $dadosUsuario->save();
+        }//if erro 0
+
+        echo json_encode([
+            'erro' => $erro,
+            'endereco' => $dadosUsuario->endereco!=null?$dadosUsuario->endereco:'',
+        ]);exit;
+    }//ajax atualizar endereco
+
+    //Finaliza pedido e envia para pagamento
+    public function pagamento(Request $request){
+        $erro =0;
+        $id='';
+        $modelCarrinho = new Carrinho();
+        $dadosCarrinho = $modelCarrinho->where(['id'=>$request->id])->first();
+
+        if($dadosCarrinho==null||$request->endereco=='')
+            $erro=1;
+        else{
+            $id = $dadosCarrinho->id;
+            $dadosCarrinho->entrega = $request->endereco;
+            $dadosCarrinho->dt_finalizado = date('Y-m-d H:i:s');
+            $dadosCarrinho->status = 2;
+            $dadosCarrinho->save();
+        }//if / else dados carrinho finaliza
+
+        echo json_encode([
+            'erro' => $erro,
+            'id' => $id
+        ]);exit;
+    }//finalzia pedido e envia para pagamento
 
 }//Class

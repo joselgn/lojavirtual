@@ -105,7 +105,7 @@
                                 Não possui nenhum item em seu carrinho de compras!
                               <br>
                           </td></tr>';
-                }//if ; else lista itens
+                }//if / else lista itens
             ?>
             </tbody>
         </table>
@@ -114,7 +114,7 @@
         <a href="{{ url('/') }}" class="btn btn-large pull-left"><i class="icon-arrow-left"></i> Continuar comprando </a>
 
          @if($carrinhoId!='')
-            <a href="{{ url('/finalizaCompra/'.$carrinhoId) }}" class="btn btn-large pull-right">Finalizar compra <i class="icon-arrow-right"></i></a>
+            <a href="{{ url('/finalizar/'.$carrinhoId) }}" class="btn btn-large pull-right">Finalizar compra <i class="icon-arrow-right"></i></a>
          @endif
 
     </div>

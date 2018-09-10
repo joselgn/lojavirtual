@@ -74,8 +74,12 @@ Route::middleware('auth')->group(function () {
     //CARRINHO DE COMPRAS
     Route::get('/carrinho/{id?}', 'CarrinhoController@index');
     Route::get('/comprar/{id}', 'CarrinhoController@comprar');
+    Route::get('/finalizar/{id}', 'CarrinhoController@telaFinalizaCompra');
+    Route::get('/pagar/{id}', 'CarrinhoController@telaPagamento');
     //Ajax
     Route::post('/ajax-carrinho-item','CarrinhoController@ajaxItem');
+    Route::post('/ajax-carrinho-atualiza-endereco','CarrinhoController@atualizar');
+    Route::post('/ajax-carrinho-finaliza-pedido','CarrinhoController@pagamento');
 
 });//auth routes
 

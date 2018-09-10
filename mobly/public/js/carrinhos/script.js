@@ -50,4 +50,61 @@ var scriptJS = {
             }//success ajax
         });//AJAX
     },//acao itens
+    manterEndereco : function(){
+        var enderecoAtual = $('#enderecoAtual').val();
+        $('#endereco').val(enderecoAtual);
+    },
+    cadastraEndereco : function(){
+        var idcarrinho = $('#pedido').val();
+        var endereco   = $('#endereco').val();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'POST',
+            url: top.baseURL+'/ajax-carrinho-atualiza-endereco',
+            dataType: "json",
+            data: {
+                id          : idcarrinho,
+                endereco    : endereco
+            },
+            success: function (data) {
+                var erro = data.erro;
+
+                if(erro==0){
+                    $('#enderecoAtual').val(data.endereco);
+                    alert('Endereço atualizado com sucesso!');
+                }else{
+                    alert('Endereço não atualizado!')
+                }
+            }//success
+        });//AJAX
+    },
+    finalizaPedido : function(){
+        var idcarrinho = $('#pedido').val();
+        var endereco   = $('#endereco').val();
+
+        $.ajax({
+            headers: {
+                'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'POST',
+            url: top.baseURL+'/ajax-carrinho-finaliza-pedido',
+            dataType: "json",
+            data: {
+                id          : idcarrinho,
+                endereco    : endereco
+            },
+            success: function (data) {
+                var erro = data.erro;
+
+                if(erro==0){
+                    window.location.href =top.baseURL+'/pagar/'+data.id;
+                }else{
+                    alert('Falha ao finalizar pedido!')
+                }
+            }//success
+        });//AJAX
+    },
 };//JS
