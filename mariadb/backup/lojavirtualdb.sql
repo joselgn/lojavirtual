@@ -11,12 +11,12 @@
  Target Server Version : 100309
  File Encoding         : 65001
 
- Date: 09/09/2018 14:35:01
+ Date: 10/09/2018 00:58:37
 */
+
 
 CREATE DATABASE lojavirtualdb;
 USE lojavirtualdb;
-
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -64,6 +64,7 @@ CREATE TABLE `carrinhos`  (
   `dt_finalizado` datetime(0) NULL DEFAULT NULL,
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `entrega` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `carrinhos_id_user_foreign`(`id_user`) USING BTREE,
   CONSTRAINT `carrinhos_id_user_foreign` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
@@ -72,8 +73,8 @@ CREATE TABLE `carrinhos`  (
 -- ----------------------------
 -- Records of carrinhos
 -- ----------------------------
-INSERT INTO `carrinhos` VALUES (1, 2, 1, 218.12, NULL, '2018-09-08 02:32:06', '2018-09-08 17:02:15');
-INSERT INTO `carrinhos` VALUES (2, 1, 1, 376.24, NULL, '2018-09-08 16:29:40', '2018-09-08 16:29:42');
+INSERT INTO `carrinhos` VALUES (1, 2, 2, 328.12, '2018-09-10 03:52:41', '2018-09-09 18:55:43', '2018-09-10 03:52:41', 'SQS 205 Bloco I apto 204');
+INSERT INTO `carrinhos` VALUES (2, 2, 2, 45.00, '2018-09-10 03:55:43', '2018-09-10 03:55:35', '2018-09-10 03:55:43', 'SQS 205 Bloco I apto 204');
 
 -- ----------------------------
 -- Table structure for categorias
@@ -123,14 +124,14 @@ CREATE TABLE `lista_carrinhos`  (
   INDEX `lista_carrinhos_id_prod_foreign`(`id_prod`) USING BTREE,
   CONSTRAINT `lista_carrinhos_id_carrinho_foreign` FOREIGN KEY (`id_carrinho`) REFERENCES `carrinhos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `lista_carrinhos_id_prod_foreign` FOREIGN KEY (`id_prod`) REFERENCES `produtos` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of lista_carrinhos
 -- ----------------------------
-INSERT INTO `lista_carrinhos` VALUES (24, 2, 12, 2, 188.12, 376.24, '2018-09-08 16:29:40', '2018-09-08 16:29:42');
-INSERT INTO `lista_carrinhos` VALUES (25, 1, 10, 3, 10.00, 30.00, '2018-09-08 17:00:29', '2018-09-08 17:01:12');
-INSERT INTO `lista_carrinhos` VALUES (26, 1, 12, 1, 188.12, 188.12, '2018-09-08 17:00:50', '2018-09-08 17:02:15');
+INSERT INTO `lista_carrinhos` VALUES (1, 1, 12, 1, 188.12, 188.12, '2018-09-09 18:55:43', '2018-09-09 18:55:43');
+INSERT INTO `lista_carrinhos` VALUES (2, 1, 13, 2, 70.00, 140.00, '2018-09-09 18:55:46', '2018-09-09 18:56:16');
+INSERT INTO `lista_carrinhos` VALUES (3, 2, 9, 1, 45.00, 45.00, '2018-09-10 03:55:35', '2018-09-10 03:55:35');
 
 -- ----------------------------
 -- Table structure for migrations
@@ -141,7 +142,7 @@ CREATE TABLE `migrations`  (
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of migrations
@@ -153,8 +154,9 @@ INSERT INTO `migrations` VALUES (13, '2018_09_04_030616_create_caracteristicas_t
 INSERT INTO `migrations` VALUES (16, '2018_09_04_035132_create_produtos_table', 4);
 INSERT INTO `migrations` VALUES (17, '2018_09_05_042836_vin_prod_carac', 4);
 INSERT INTO `migrations` VALUES (18, '2018_09_05_210747_vin_prod_categ', 5);
-INSERT INTO `migrations` VALUES (19, '2018_09_07_203604_create_carrinhos_table', 6);
-INSERT INTO `migrations` VALUES (20, '2018_09_07_211937_create_lista_carrinhos_table', 6);
+INSERT INTO `migrations` VALUES (21, '2018_09_07_203604_create_carrinhos_table', 6);
+INSERT INTO `migrations` VALUES (22, '2018_09_07_211937_create_lista_carrinhos_table', 6);
+INSERT INTO `migrations` VALUES (23, '2018_09_09_183540_update_carrinhos_table', 6);
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -221,7 +223,7 @@ CREATE TABLE `users`  (
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES (1, 1, 1, 'Administrador para Teste', 'admin@teste.com', '$2y$10$sElcW12jQKlwqG8xa5pD5Ojj7mZCyHT8dz28BuWe7iVXYuCCyXSZ2', '0tN8V!%.Qo$h-xEElQeO$VD', NULL, NULL, 'Qd0SfnvsI2B3k33oKS3f8Qsow2C9MNJdqSwUa8DsxVy2GQyoWhHz6r86eEAI', '2018-09-01 23:38:54', '2018-09-01 23:38:54');
-INSERT INTO `users` VALUES (2, 1, 2, 'Teste Usuario', 'teste@teste.com', '$2y$10$YZJZDhU9fa2QCpLaBF7XFeozbclWPH0lvi60B5zihFIq31qRqf/Xu', '@lkM-vMDwKC-wfipNW', NULL, NULL, 'uiGOAVZdcvigWyuD6IScFVV6AwKOStcMg9SvmP0vLaMEiu9dUT7TGHHZVhpP', '2018-09-02 00:55:55', '2018-09-02 00:55:55');
+INSERT INTO `users` VALUES (2, 1, 2, 'Teste Usuario', 'teste@teste.com', '$2y$10$YZJZDhU9fa2QCpLaBF7XFeozbclWPH0lvi60B5zihFIq31qRqf/Xu', '@lkM-vMDwKC-wfipNW', 'SQS 205 Bloco I apto 204', NULL, 'EsyWOqY3iFeKJMjFpc1xlrBTuhDkukh5HBEIelAOPws9mJMBjZhyFJ0KBmg1', '2018-09-02 00:55:55', '2018-09-10 03:30:20');
 INSERT INTO `users` VALUES (3, 1, 2, 'Joao Usuario Teste', 'joao@teste.com', '$2y$10$qF71gSvV05JZS.tc76oKPu9xdzzpWEq66i8iMgZQHHc9.84VQrhFO', '4Qbvrxstc&Dh/uSPnuCaD1PDk&l?r5#fqaHDF6+bJA1Te@dTun0&1J/i?8kp2e', 'SHIN Teste endereco do joao', 71515413, NULL, '2018-09-04 02:21:21', '2018-09-04 02:31:33');
 INSERT INTO `users` VALUES (5, 1, 2, 'carlos H morcelli', 'carlos@teste.com', '$2y$10$lciYr5fXN/7A08ixfblAVOcIhc.ugdCkw16SVhmwVdWhp.923Gs.e', 'sjTX10PS.edxs3N7$41se/zJG!gnrb!lEI#F%lBB1R$CZSnbb%b1Hu?msL*%BnJfV/doh!Ri+', 'Moro em Taguatinga nas Qna 18 não atualmente', 71000000, 'VJklrsettrOhpdDT3mTp0LQy9XWqwzRDnHopO1gjWOKE0RHbsi9diJPN2dGc', '2018-09-04 02:32:33', '2018-09-04 02:32:33');
 
