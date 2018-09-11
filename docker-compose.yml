@@ -10,9 +10,9 @@ db:
      - ./mariadb/bd:/home/dados
 
 #Aplicação
-teste-mobly:
+lojavirtual:
   image: php:7-apache
-  container_name: teste-mobly
+  container_name: lojavirtual
   ports:
     - "80:80"
   volumes:

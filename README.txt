@@ -9,7 +9,7 @@ INTRODUÇÃO:
 2 - Usar o git para clonar o projeto: git clone https://github.com/joselgn/lojavirtual.git
 3 - Após o clone da aplicação, executar o docker compose para criação dos containers: docker-compose up -d
 4 - Assim que finalizado a criação dos containers verificar se eles estão ativos e online: docker ps
-5 - Deverão aparecer os seguintes container ativos "teste-mobly" e "mariaDB". Caso os containers não tenham subido executar o comando: docker-compose start
+5 - Deverão aparecer os seguintes container ativos "lojavirtual" e "mariaDB". Caso os containers não tenham subido executar o comando: docker-compose start
 6 - Nesse ponto com os containers prontos e online, restaurar a base de dados para teste, para isso, pode ser utilizando SGBD de sua preferência:
 		6.1 - Credenciais ~> Host: localhost / Usuario: root / senha: root
 		6.2 - Caso o item 6.1 falhe, acessar o container com o comando: docker exec -ti mariaDB bash
@@ -17,14 +17,14 @@ INTRODUÇÃO:
 		6.4 - Pegar o IP vinculado ao container: ifconfig
 		6.5 - Tentar acessar com as seguintes credenciais: Host: IP_Container / Usuario: root / senha: root
 7 - Restaurar o backup de teste localizado na pasta mariadb/backup/lojavirtualdb.sql;
-8 - Acessar o container da aplicação: docker exec -ti teste-mobly bash
+8 - Acessar o container da aplicação: docker exec -ti lojavirtual bash
 9 - Atualizar os pacotes instaladores: apt-get update
 10 - Instalar as extensões php docker-php-ext-install pdo pdo_mysql
 11 - Instalar o git: apt-get install git
 12 - Acessar a pasta da aplicação: cd /var/www/html
 13 - Instalar o composer da aplicação: php composer.phar install
 14 - Reiniciar o apache: service apache2 restart
-15 - Subir o container novamente: docker start teste-mobly
+15 - Subir o container novamente: docker start lojavirtual
 16 - Ainda na pasta da aplicação renomear o arquivo ".env.example" para ".env" e configurar com os dados adquiridos nos passos anteriores a conexão com o banco de dados.
 17 - Entrar na pasta da aplicação e gerar a key do Laravel: php artisan key:generate
 18 - nesse momento a aplicação deverá estar funcionando e para acessar basta ir no browser e acessar pelo seguinte endereço: http://localhost:80/public/index.php
